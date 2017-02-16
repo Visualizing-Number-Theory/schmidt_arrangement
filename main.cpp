@@ -17,14 +17,22 @@ int main(int argc, const char * argv[])
 
     ALLEGRO_DISPLAY *display = NULL;
     ALLEGRO_EVENT_QUEUE *event_queue = NULL;
+    ALLEGRO_TIMER *timer = NULL;
 
-	if(!al_init())
+	if(!al_init()){
 		return -1;
+	}
 
 	display = al_create_display(700, 700);
+	timer = al_create_timer(0.5);
 
-	if(!display)
-		return -1;
+	if(!display){
+        return -1;
+	}
+
+    if(!timer){
+        return -1;
+    }
 
 	al_init_primitives_addon();
 	al_install_mouse();
@@ -35,6 +43,7 @@ int main(int argc, const char * argv[])
     al_register_event_source(event_queue, al_get_mouse_event_source());
 
     bool done = false;
+    bool down = false;
     float pos_x;
     float pos_y;
 
@@ -55,7 +64,21 @@ int main(int argc, const char * argv[])
 
 
         case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+            cout<<"mouse down"<<endl;
+            al_start_timer(timer);
+            down = true;
 
+        case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
+            if(down == true){
+                al_stop_timer(timer);
+                if(al_get_timer_count(timer) <=1){
+                    cout<<"click"<<endl;
+                }
+                else{
+                    cout<<"drag"<<endl;
+                }
+                down = false;
+            }
 
         }
 
