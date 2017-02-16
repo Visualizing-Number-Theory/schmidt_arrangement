@@ -24,7 +24,7 @@ int main(int argc, const char * argv[])
 	}
 
 	display = al_create_display(700, 700);
-	timer = al_create_timer(0.5);
+	timer = al_create_timer(0.1);
 
 	if(!display){
         return -1;
@@ -44,6 +44,9 @@ int main(int argc, const char * argv[])
 
     bool done = false;
     bool down = false;
+    bool flag = true;
+    float initpos_x;
+    float initpos_y;
     float pos_x;
     float pos_y;
 
@@ -57,32 +60,43 @@ int main(int argc, const char * argv[])
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
             done = true;
 
+        case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
+            if(down){
+                al_stop_timer(timer);
+                if(al_get_timer_count(timer) <=3){
+                    //CLICK => circle selection
+                }
+                else{
+                    //DRAG => zoom
+                }
+            }
+            down = false;
+            al_clear_to_color(al_map_rgb(0, 0, 0));
+
+
+        case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+            flag = !flag;
+            if(!down && !flag){
+                al_set_timer_count(timer, 0);
+                al_start_timer(timer);
+                initpos_x = ev.mouse.x;
+                initpos_y = ev.mouse.y;
+                down = true;
+            }
+
+
         case ALLEGRO_EVENT_MOUSE_AXES:
             //circle highlighting
             pos_x = ev.mouse.x;
             pos_y = ev.mouse.y;
-
-
-        case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-            cout<<"mouse down"<<endl;
-            al_start_timer(timer);
-            down = true;
-
-        case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
-            if(down == true){
-                al_stop_timer(timer);
-                if(al_get_timer_count(timer) <=1){
-                    cout<<"click"<<endl;
-                }
-                else{
-                    cout<<"drag"<<endl;
-                }
-                down = false;
+            if(al_get_timer_count(timer) >= 3 && down){
+                al_clear_to_color(al_map_rgb(0, 0, 0));
+                al_draw_rectangle(initpos_x, initpos_y, pos_x, pos_y, al_map_rgb(255, 0, 0), 1);
             }
 
         }
 
-
+        al_flip_display();
 
     }
 
