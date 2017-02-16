@@ -12,18 +12,15 @@
 
 using namespace std;
 
-template<class t>
-Circle<t>::Circle() {}
+Circle::Circle() {}
 
-template<class t>
-void Circle<t>::zoom()
+void Circle::zoom()
 {
     //zoom function
     cout << "Zooming in/out" << endl;
 }
 
-template<class t>
-void Circle<t>::set_info()
+void Circle::set_info()
 {
     //Extract info about circle
     float r = 10.0;
@@ -43,8 +40,7 @@ void Circle<t>::set_info()
 
 }
 
-template<class t>
-void Circle<t>::get_info()
+void Circle::get_info()
 {
     cout << "Radii = " << new_info -> radii << endl;
     cout << "x_coor = " << new_info -> x_coor << endl;
@@ -66,8 +62,7 @@ void Circle<t>::get_info()
     }
 }
 
-template<class t>
-Circle<t>::~Circle()
+Circle::~Circle()
 {
     //Delete the new_info struct, but I'm too lazy
 }

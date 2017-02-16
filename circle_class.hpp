@@ -14,19 +14,18 @@
 
 using namespace std;
 
-template<class t>
 class Circle
 {
 private:
     struct Info
     {
         //t is an arbitrary type (int, float, char, ect.)
-        t radii;
-        t x_coor;
-        t y_coor;
+        float radii;
+        float x_coor;
+        float y_coor;
         vector<vector<float>> matrix;
     };
-    
+
     Info *new_info;
 
 public:
