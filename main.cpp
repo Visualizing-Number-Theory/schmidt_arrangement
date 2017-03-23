@@ -1,13 +1,10 @@
-//
 //  main.cpp
 //  circle_class
-//
-//  Created by Paul Laliberte on 2/2/17.
-//  Copyright © 2017 Paul Laliberte. All rights reserved.
-//
 
 #include "circle_class.hpp"
 #include "circle_class.cpp"
+#include "circle_group.hpp"
+#include "circle_group.cpp"
 #include <iostream>
 #include "allegro5/allegro5.h"
 #include "allegro5/allegro_primitives.h"
@@ -44,59 +41,84 @@ int main(int argc, const char * argv[])
 
     bool done = false;
     bool down = false;
-    bool flag = true;
+    bool change = true;
+    int high = -1;
+    int oldhigh = -1;
     float initpos_x;
     float initpos_y;
     float pos_x;
     float pos_y;
 
+    CircleGroup Apollo;
+
     while(!done){
 
         ALLEGRO_EVENT ev;
+
+        if(change){
+            al_clear_to_color(al_map_rgb(0, 0, 0));
+            Apollo.show();
+            al_flip_display();
+        }
+
         al_wait_for_event(event_queue, &ev);
+
 
         switch(ev.type){
 
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
             done = true;
+            change = false;
+            break;
+
+        case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+            al_set_timer_count(timer, 0);
+            al_start_timer(timer);
+            initpos_x = ev.mouse.x;
+            initpos_y = ev.mouse.y;
+            down = true;
+            change = false;
+            break;
 
         case ALLEGRO_EVENT_MOUSE_BUTTON_UP:
             if(down){
                 al_stop_timer(timer);
-                if(al_get_timer_count(timer) <=3){
+                if(al_get_timer_count(timer) <= 2.5){
                     //CLICK => circle selection
+                    change = false;
                 }
                 else{
                     //DRAG => zoom
+                    Apollo.zoom(initpos_x, ev.mouse.x, initpos_y, ev.mouse.y);
+                    change = true;
                 }
             }
             down = false;
-            al_clear_to_color(al_map_rgb(0, 0, 0));
-
-
-        case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
-            flag = !flag;
-            if(!down && !flag){
-                al_set_timer_count(timer, 0);
-                al_start_timer(timer);
-                initpos_x = ev.mouse.x;
-                initpos_y = ev.mouse.y;
-                down = true;
-            }
-
+            break;
 
         case ALLEGRO_EVENT_MOUSE_AXES:
             //circle highlighting
             pos_x = ev.mouse.x;
             pos_y = ev.mouse.y;
-            if(al_get_timer_count(timer) >= 3 && down){
-                al_clear_to_color(al_map_rgb(0, 0, 0));
+            change = true;
+            if(al_get_timer_count(timer) >= 2.5 && down){
                 al_draw_rectangle(initpos_x, initpos_y, pos_x, pos_y, al_map_rgb(255, 0, 0), 1);
             }
+            else{
+                high = Apollo.highlight(pos_x, pos_y);
+                if(oldhigh != -1 && high != oldhigh){
+                    change = true;
+                }else{
+                    change = false;
+                }
+                oldhigh = high;
+            }
+            break;
 
         }
 
         al_flip_display();
+
 
     }
 

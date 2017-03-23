@@ -14,15 +14,18 @@ using namespace std;
 class CircleGroup
 {
 private:
+    float x;
+    float y;
+    float dist;
     vector<Circle> circles;
 
 public:
     //constructor
     CircleGroup();
     //methods
-    void zoom(float x_0, float y_0, float dist);
+    void zoom(float x1, float x2, float y1, float y2);
     void show();
-    void highlight(float x, float y);
+    int highlight(float x, float y);
     //destructor
     virtual ~CircleGroup();
 };

@@ -1,10 +1,5 @@
-//
 //  circle_class.hpp
 //  circle_class
-//
-//  Created by Paul Laliberte on 2/2/17.
-//  Copyright © 2017 Paul Laliberte. All rights reserved.
-//
 
 #ifndef circle_class_hpp
 #define circle_class_hpp
@@ -20,21 +15,24 @@ private:
     struct Info
     {
         //t is an arbitrary type (int, float, char, ect.)
-        float radii;
+        float radius;
         float x_coor;
         float y_coor;
         vector<vector<float>> matrix;
     };
 
-    Info *new_info;
+    Info* new_info;
 
 public:
     //constructor
     Circle();
+    Circle(float r, float x, float y);
     //methods
-    void zoom();
     void set_info();
-    void get_info();
+    float get_radius();
+    float get_x();
+    float get_y();
+    void print_info();
     //destructor
     virtual ~Circle();
 };
