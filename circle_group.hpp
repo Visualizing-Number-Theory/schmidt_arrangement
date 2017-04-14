@@ -1,15 +1,14 @@
 //  circle_group.hpp
 //  circle_group
 
+#include "circle_class.hpp"
+
+using namespace std;
+
 
 #ifndef circle_group_hpp
 #define circle_group_hpp
 
-#include <stdio.h>
-#include <vector>
-#include "circle_class.hpp"
-
-using namespace std;
 
 class CircleGroup
 {

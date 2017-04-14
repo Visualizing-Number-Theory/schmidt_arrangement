@@ -1,15 +1,9 @@
 //  main.cpp
 //  circle_class
 
-#include "circle_class.hpp"
-#include "circle_class.cpp"
 #include "circle_group.hpp"
-#include "circle_group.cpp"
-#include <iostream>
-#include "allegro5/allegro5.h"
-#include "allegro5/allegro_primitives.h"
 
-int main(int argc, const char * argv[])
+int main(int argc, char **argv)
 {
 
     ALLEGRO_DISPLAY *display = NULL;
@@ -85,6 +79,7 @@ int main(int argc, const char * argv[])
                 al_stop_timer(timer);
                 if(al_get_timer_count(timer) <= 2.5){
                     //CLICK => circle selection
+                    std::cout << "clicked" << std::endl;
                     change = false;
                 }
                 else{

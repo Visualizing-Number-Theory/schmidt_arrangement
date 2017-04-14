@@ -1,13 +1,18 @@
 //  circle_class.hpp
 //  circle_class
 
+#include <iostream>
+#include <vector>
+
+#include "allegro5/allegro.h"
+#include "allegro5/allegro_native_dialog.h"
+#include "allegro5/allegro_primitives.h"
+
+using namespace std;
+
 #ifndef circle_class_hpp
 #define circle_class_hpp
 
-#include <stdio.h>
-#include <vector>
-
-using namespace std;
 
 class Circle
 {
@@ -18,7 +23,7 @@ private:
         float radius;
         float x_coor;
         float y_coor;
-        vector<vector<float>> matrix;
+        vector<vector<float> > matrix;
     };
 
     Info* new_info;

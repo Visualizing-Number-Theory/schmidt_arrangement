@@ -2,8 +2,6 @@
 //  circle_class
 
 #include "circle_class.hpp"
-#include <iostream>
-#include <vector>
 
 using namespace std;
 
