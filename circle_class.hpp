@@ -30,7 +30,6 @@ private:
 
 public:
     //constructor
-    Circle();
     Circle(float r, float x, float y);
     //methods
     void set_info();

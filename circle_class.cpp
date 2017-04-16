@@ -5,9 +5,6 @@
 
 using namespace std;
 
-Circle::Circle(){
-
-}
 
 Circle::Circle(float r, float x, float y) {
 
@@ -55,3 +52,26 @@ Circle::~Circle()
     ///some drama here that needs to be figured out
     //delete new_info;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

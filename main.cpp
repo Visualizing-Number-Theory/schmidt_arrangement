@@ -79,7 +79,6 @@ int main(int argc, char **argv)
                 al_stop_timer(timer);
                 if(al_get_timer_count(timer) <= 2.5){
                     //CLICK => circle selection
-                    std::cout << "clicked" << std::endl;
                     change = false;
                 }
                 else{

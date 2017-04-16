@@ -1,3 +1,4 @@
+
 //  circle_group.cpp
 //  circle_group
 
@@ -131,3 +132,4 @@ CircleGroup::~CircleGroup() {
         circles.pop_back();
     }
 }
+
