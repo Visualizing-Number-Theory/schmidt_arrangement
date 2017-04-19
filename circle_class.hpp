@@ -20,49 +20,40 @@
 
 using namespace std;
 
-#ifndef circle_class_hpp
-#define circle_class_hpp
+#ifndef class_sa_hpp
+#define class_sa_hpp
 
-
-class Circle
+class sa_algo
 {
 private:
-    struct Info
-    {
-        //initial variables
-        float radius, x_coor, y_coor;
-        int prime, delta;
-    
-        //e_d, e_bp, e_dp
-        int e_d, e_bp, e_dp;
+    //initial variables
+    int radius, x_coor, y_coor, prime, delta;
 
-        //d_p
-        int d_p;
-    
-        //d, bp
-        int d, b_p;
-    
-        //points to find
-        int a, b, a_p, c, c_p;
-    
-        //matrix (store variables in array)
-        std::complex<int> A[2][2];
-    };
+    //e_d, e_bp, e_dp
+    int e_d, e_bp, e_dp;
 
-    Info *new_info;
+    //d_p
+    int d_p;
+    
+    //d, bp
+    int d, b_p;
+    
+    //points to find
+    int a, b, a_p, c, c_p;
+    
+    //matrix (store variables in array)
+    std::complex<int> A[2][2];
 
 
 public:
     //constructor
-    Circle(float r, float y, float x, int p);
+    sa_algo(int r, int x, int y);
     
     //check conditions
-    //bool isPrime(int var);
     //int check_conditions();
     //int check_circle_equivalence();
     
     //setter methods
-    /*
     void find_ed();
     void find_ebp_edp();
     void find_dp();
@@ -70,13 +61,13 @@ public:
     void find_bp();
     void find_points();
     void find_circle_matrix();
-    */
+
+    int get_x();
+    int get_y();
+    int get_radius();
     
     //getter methods
-    float get_x();
-    float get_y();
-    float get_radius();
-    /*
+    void get_initial_variables();
     void get_ed();
     void get_ebp_edp();
     void get_dp();
@@ -84,11 +75,12 @@ public:
     void get_bp();
     void get_points();
     void get_circle_matrix();
-    */
     
     //destructor
-    ~Circle();
-
+    ~sa_algo();
+    
 };
 
-#endif /* circle_class_hpp */
+
+
+#endif /* class_sa_hpp */

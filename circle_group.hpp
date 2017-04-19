@@ -16,7 +16,7 @@ private:
     float x;
     float y;
     float dist;
-    vector<Circle> circles;
+    vector<sa_algo> circles;
 
 public:
     //constructor
@@ -24,7 +24,7 @@ public:
     //methods
     void zoom(float x1, float x2, float y1, float y2);
     void show();
-    Circle click(float x, float y);
+    sa_algo click(float x, float y);
     int highlight(float x, float y);
     //destructor
     virtual ~CircleGroup();
