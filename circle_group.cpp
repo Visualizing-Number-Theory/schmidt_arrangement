@@ -106,6 +106,28 @@ void CircleGroup::show(){
 
 }
 
+Circle CircleGroup::click(float posx, float posy)
+{
+    float dsq = 0;
+    float rsqmax = 0;
+    float rsqmin = 0;
+
+
+    for(int i = 0; i < circles.size(); i++){
+        dsq = (posx-circles[i].get_x())*(posx-circles[i].get_x()) + (posy-circles[i].get_y())*(posy-circles[i].get_y());
+        rsqmax = circles[i].get_radius()*circles[i].get_radius()*1.05 + 150;
+        rsqmin = circles[i].get_radius()*circles[i].get_radius()*0.95 - 150;
+
+        if(dsq >= rsqmin && dsq <= rsqmax){
+            al_draw_circle(circles[i].get_x(), circles[i].get_y(), circles[i].get_radius(), al_map_rgb(255, 0, 0), 3);
+            return circles[i];
+        }
+    }
+    return Circle(0,0,0,0);
+
+}
+
+
 int CircleGroup::highlight(float posx, float posy){
 
     float dsq = 0;

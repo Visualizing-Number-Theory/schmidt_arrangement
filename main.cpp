@@ -79,7 +79,9 @@ int main(int argc, char **argv)
                 al_stop_timer(timer);
                 if(al_get_timer_count(timer) <= 2.5){
                     //CLICK => circle selection
-                    change = false;
+                    Circle a_circle = Apollo.click(initpos_x, initpos_y);
+                    std::cout << a_circle.get_radius() << " " << a_circle.get_x() << " " << a_circle.get_y() << std::endl;
+                    change = true;
                 }
                 else{
                     //DRAG => zoom

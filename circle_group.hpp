@@ -24,6 +24,7 @@ public:
     //methods
     void zoom(float x1, float x2, float y1, float y2);
     void show();
+    Circle click(float x, float y);
     int highlight(float x, float y);
     //destructor
     virtual ~CircleGroup();
