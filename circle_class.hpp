@@ -27,22 +27,22 @@ class sa_algo
 {
 private:
     //initial variables
-    int radius, x_coor, y_coor, prime, delta;
+    long long int radius, x_coor, y_coor, prime, delta;
 
     //e_d, e_bp, e_dp
-    int e_d, e_bp, e_dp;
+    long long int e_d, e_bp, e_dp;
 
     //d_p
-    int d_p;
+    long long int d_p;
     
     //d, bp
-    int d, b_p;
+    long long int d, b_p;
     
     //points to find
-    int a, b, a_p, c, c_p;
+    long long int a, b, a_p, c, c_p;
     
     //matrix (store variables in array)
-    std::complex<int> A[2][2];
+    std::complex<long long int> A[2][2];
 
 
 public:
@@ -50,7 +50,7 @@ public:
     sa_algo(int r, int x, int y);
     
     //check conditions
-    //int check_conditions();
+    int check_conditions();
     //int check_circle_equivalence();
     
     //setter methods
@@ -62,9 +62,10 @@ public:
     void find_points();
     void find_circle_matrix();
 
+    int get_prime();
+    int get_radius();
     int get_x();
     int get_y();
-    int get_radius();
     
     //getter methods
     void get_initial_variables();

@@ -3,6 +3,44 @@
 
 #include "circle_group.hpp"
 
+void find_matrix(sa_algo some_circle)
+{
+
+    int check = some_circle.check_conditions();
+    int prime = some_circle.get_prime();
+
+    //std::cout << check << " " << prime << std::endl;
+
+    if (check == 0 && prime != -1)
+    {
+        some_circle.find_ed();
+        //some_circle.get_ed();
+
+        some_circle.find_ebp_edp();
+        //some_circle.get_ebp_edp();
+
+        some_circle.find_dp();
+        //some_circle.get_dp();
+
+        some_circle.find_d();
+        //some_circle.get_d();
+
+        some_circle.find_bp();
+        //some_circle.get_bp();
+
+        some_circle.find_points();
+        //some_circle.get_points();
+    
+        some_circle.find_circle_matrix();
+        some_circle.get_circle_matrix();
+    }
+    else
+    {
+        std::cout << "One or more conditions do not hold" << std::endl;
+    }
+    
+}
+
 int main(int argc, char **argv)
 {
 
@@ -80,13 +118,11 @@ int main(int argc, char **argv)
                 if(al_get_timer_count(timer) <= 2.5){
                     //CLICK => circle selection
                     sa_algo a_circle = Apollo.click(initpos_x, initpos_y);
-                    //std::cout << a_circle.get_radius() << " " << a_circle.get_x() << " " << a_circle.get_y() << std::endl;
-                    int r = a_circle.get_radius();
-                    int x = a_circle.get_x();
-                    int y = a_circle.get_y();
-                    if (r != 0 || x != 0 || y != 0)
+                    if (a_circle.get_radius() != 0 || a_circle.get_x() != 0 || a_circle.get_y() != 0)
                     {
-                        std::cout << r << " " << x << " " << y << std::endl;
+                        std::cout << a_circle.get_radius() << " " <<  a_circle.get_x() << " " << a_circle.get_y() << std::endl;
+                        //INTS are too big... and float circles...
+                        //find_matrix(a_circle);
                         change = true;
                     }
                     else

@@ -31,50 +31,37 @@ sa_algo::sa_algo(int r, int x, int y)
     y_coor= y;
     prime = isPrime(r);
 
+    //std::cout << prime << std::endl;
+
     delta = -1;
 }
-
-/*
 
 //make sure input is valid
 int sa_algo::check_conditions()
 {
-    int right_var = std::pow(x_coor, 2) + y_coor + std::pow(y_coor,2);
+    long long int right_var = x_coor * x_coor + y_coor + y_coor * y_coor;
     if (right_var % radius != 0)
     {
-        throw std::invalid_argument("The condition (1) does not hold.");
-    }
-    
-    bool check_prime = isPrime(prime);
-    
-    if (check_prime == true)
-    {
-        if (radius % prime != 0)
-        {
-            throw std::invalid_argument("p does not divide r.");
-        }
-    }
-    else{
-        throw std::invalid_argument("p is not prime.");
-    }
-    
+        //throw std::invalid_argument("The condition (1) does not hold.");
+        return 1;
+    } 
+
     return 0;
 }
-*/
 
 
 //setter methods
 void sa_algo::find_ed()
 {
-    int var = 1 + y_coor;
+    long long int var = 1 + y_coor;
     if (var % prime != 0)
     {
         e_d = 0;
     }
     else
     {
-        int e_r = radius / prime;
-        int e_x = x_coor / prime;
+        long long int e_r = radius / prime;
+        long long int e_x = x_coor / prime;
         e_d = std::min(e_r, e_x);
         
     }
@@ -89,8 +76,8 @@ void sa_algo::find_ebp_edp()
     }
     else
     {
-        int e_r = radius / prime;
-        int e_x = x_coor / prime;
+        long long int e_r = radius / prime;
+        long long int e_x = x_coor / prime;
         e_bp = std::min(e_r, e_x);
         e_dp = e_bp;
     }
@@ -98,8 +85,11 @@ void sa_algo::find_ebp_edp()
 
 void sa_algo::find_dp()
 {
-    int iterations = radius / prime;
-    int p_to_edp = std::pow(prime, e_dp);
+    long long int iterations = radius / prime;
+    long long int p_to_edp = std::pow(prime, e_dp);
+
+    //std::cout << iterations << " " << p_to_edp << std::endl;
+    
     while (iterations > 1)
     {
         p_to_edp = p_to_edp * p_to_edp;
@@ -112,24 +102,24 @@ void sa_algo::find_dp()
 
 void sa_algo::find_d()
 {
-    int left1 = y_coor;
-    int right1 = -d_p * x_coor;
+    long long int left1 = y_coor;
+    long long int right1 = -d_p * x_coor;
 
-    int left2 = x_coor;
-    int right2 = d_p * (1 + y_coor);
+    long long int left2 = x_coor;
+    long long int right2 = d_p * (1 + y_coor);
 
-    int mod = std::pow(prime, radius / prime);
+    long long int mod = std::pow(prime, radius / prime);
 
-    int arr[mod];
-    for (int i=0; i < mod; i++)
+    long long int arr[mod];
+    for (long long int i=0; i < mod; i++)
     {
         arr[i] = i;
     }
 
-    for (int d_=0; d_ < mod; d_++)
+    for (long long int d_=0; d_ < mod; d_++)
     {
-        int eqn1 = d_ * left1 - right1;
-        int eqn2 = d_ * left2 - right2;
+        long long int eqn1 = d_ * left1 - right1;
+        long long int eqn2 = d_ * left2 - right2;
 
         if (eqn1 %  mod == 0 && eqn2 % mod == 0)
         {
@@ -141,24 +131,18 @@ void sa_algo::find_d()
 
 void sa_algo::find_bp()
 {
-    int left1 = d *  y_coor + d_p * x_coor;
-    int right1 = -radius * y_coor;
+    long long int left1 = d *  y_coor + d_p * x_coor;
+    long long int right1 = -radius * y_coor;
 
-    int left2 = d * x_coor - d_p * (1 + y_coor);
-    int right2 = -radius * x_coor;
+    long long int left2 = d * x_coor - d_p * (1 + y_coor);
+    long long int right2 = -radius * x_coor;
 
-    int mod = std::pow(prime, radius / (prime + e_dp));
+    long long int mod = std::pow(prime, radius / (prime + e_dp));
     
-    int arr[mod];
-    for (int i=0; i < mod; i++)
+    for (long long int bp=0; bp < mod; bp++)
     {
-        arr[i] = i;
-    }
-
-    for (int bp=0; bp < mod; bp++)
-    {
-        int eqn1 = bp * left1 - right1;
-        int eqn2 = bp * left2 - right2;
+        long long int eqn1 = bp * left1 - right1;
+        long long int eqn2 = bp * left2 - right2;
 
         if (eqn1 % mod == 0 && eqn2 % mod == 0)
         {
@@ -180,10 +164,10 @@ void sa_algo::find_points()
 
 void sa_algo::find_circle_matrix()
 {
-    std::complex<int> a_11(a, a_p);
-    std::complex<int> a_12(c, c_p);
-    std::complex<int> a_21(b, b_p);
-    std::complex<int> a_22(d, d_p);
+    std::complex<long long int> a_11(a, a_p);
+    std::complex<long long int> a_12(c, c_p);
+    std::complex<long long int> a_21(b, b_p);
+    std::complex<long long int> a_22(d, d_p);
 
     //MatrixXcf X(2,2); //How to declare a complex matrix
     //X(0,0) = a_11;    //How to assign to complex matrix=
@@ -193,6 +177,11 @@ void sa_algo::find_circle_matrix()
     A[1][0] = a_21;
     A[1][1] = a_22;
 
+}
+
+int sa_algo::get_prime()
+{
+    return prime;
 }
 
 int sa_algo::get_radius(){
