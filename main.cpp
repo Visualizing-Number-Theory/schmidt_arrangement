@@ -118,11 +118,9 @@ int main(int argc, char **argv)
                 if(al_get_timer_count(timer) <= 2.5){
                     //CLICK => circle selection
                     sa_algo a_circle = Apollo.click(initpos_x, initpos_y);
-                    if (a_circle.get_radius() != 0 || a_circle.get_x() != 0 || a_circle.get_y() != 0)
+                    if (a_circle.get_radius2() != 0 || a_circle.get_x2() != 0 || a_circle.get_y2() != 0)
                     {
-                        std::cout << a_circle.get_radius() << " " <<  a_circle.get_x() << " " << a_circle.get_y() << std::endl;
-                        //INTS are too big... and float circles...
-                        //find_matrix(a_circle);
+                        find_matrix(a_circle);
                         change = true;
                     }
                     else

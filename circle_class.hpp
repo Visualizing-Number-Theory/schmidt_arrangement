@@ -27,27 +27,28 @@ class sa_algo
 {
 private:
     //initial variables
-    long long int radius, x_coor, y_coor, prime, delta;
+    float radius1, x_coor1, y_coor1;
+    int radius, x_coor, y_coor, prime, delta;
 
     //e_d, e_bp, e_dp
-    long long int e_d, e_bp, e_dp;
+    int e_d, e_bp, e_dp;
 
     //d_p
-    long long int d_p;
+    int d_p;
     
     //d, bp
-    long long int d, b_p;
+    int d, b_p;
     
     //points to find
-    long long int a, b, a_p, c, c_p;
+    int a, b, a_p, c, c_p;
     
     //matrix (store variables in array)
-    std::complex<long long int> A[2][2];
+    std::complex<int> A[2][2];
 
 
 public:
     //constructor
-    sa_algo(int r, int x, int y);
+    sa_algo(float r, float x, float y, int cr, int cs, int ct);
     
     //check conditions
     int check_conditions();
@@ -66,6 +67,11 @@ public:
     int get_radius();
     int get_x();
     int get_y();
+
+    int get_radius2();
+    int get_x2();
+    int get_y2();
+
     
     //getter methods
     void get_initial_variables();
