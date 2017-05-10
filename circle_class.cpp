@@ -24,16 +24,16 @@ int isPrime(int num)
 
 
 //constructor
-sa_algo::sa_algo(float r, float x, float y, int cr, int cs, int ct)
+sa_algo::sa_algo(float r, float x, float y, int c_r, int s, int t)
 {
-    radius1 = r;
-    x_coor1 = x;
-    y_coor1 = y;
+    radius = r;
+    x_coor = x;
+    y_coor = y;
 
-    radius = cr;
-    x_coor = cs;
-    y_coor = ct;
-    prime = isPrime(r);
+    cr = c_r;
+    cx = s;
+    cy = t;
+    prime = isPrime(cr);
 
 
     //std::cout << prime << std::endl;
@@ -44,8 +44,8 @@ sa_algo::sa_algo(float r, float x, float y, int cr, int cs, int ct)
 //make sure input is valid
 int sa_algo::check_conditions()
 {
-    int right_var = x_coor * x_coor + y_coor + y_coor * y_coor;
-    if (right_var % radius != 0)
+    int right_var = cx * cx + cy + cy * cy;
+    if (right_var % cr != 0)
     {
         //throw std::invalid_argument("The condition (1) does not hold.");
         return 1;
@@ -54,19 +54,36 @@ int sa_algo::check_conditions()
     return 0;
 }
 
+int sa_algo::check_d_bp()
+{
+    if (found_d == false || found_bp == false)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+int sa_algo::check_dp()
+{
+    if (d_p == 0)
+    {
+        return 1;
+    }
+    return 0;
+}
 
 //setter methods
 void sa_algo::find_ed()
 {
-    int var = 1 + y_coor;
+    int var = 1 + cy;
     if (var % prime != 0)
     {
         e_d = 0;
     }
     else
     {
-        int e_r = radius / prime;
-        int e_x = x_coor / prime;
+        int e_r = cr / prime;
+        int e_x = cx / prime;
         e_d = std::min(e_r, e_x);
         
     }
@@ -74,15 +91,15 @@ void sa_algo::find_ed()
 
 void sa_algo::find_ebp_edp()
 {
-    if (y_coor % prime != 0)
+    if (cy % prime != 0)
     {
         e_bp = 0;
         e_dp = 0;
     }
     else
     {
-        int e_r = radius / prime;
-        int e_x = x_coor / prime;
+        int e_r = cr / prime;
+        int e_x = cx / prime;
         e_bp = std::min(e_r, e_x);
         e_dp = e_bp;
     }
@@ -90,7 +107,7 @@ void sa_algo::find_ebp_edp()
 
 void sa_algo::find_dp()
 {
-    int iterations = radius / prime;
+    int iterations = cr / prime;
     int p_to_edp = std::pow(prime, e_dp);
 
     //std::cout << iterations << " " << p_to_edp << std::endl;
@@ -100,20 +117,18 @@ void sa_algo::find_dp()
         p_to_edp = p_to_edp * p_to_edp;
         iterations = iterations - 1;
     }
-
     d_p = p_to_edp;
-    
 }
 
 void sa_algo::find_d()
 {
-    int left1 = y_coor;
-    int right1 = -d_p * x_coor;
+    int left1 = cy;
+    int right1 = -d_p * cx;
 
-    int left2 = x_coor;
-    int right2 = d_p * (1 + y_coor);
+    int left2 = cx;
+    int right2 = d_p * (1 + cy);
 
-    int mod = std::pow(prime, radius / prime);
+    int mod = std::pow(prime, cr / prime);
 
     int arr[mod];
     for (int i=0; i < mod; i++)
@@ -128,6 +143,7 @@ void sa_algo::find_d()
 
         if (eqn1 %  mod == 0 && eqn2 % mod == 0)
         {
+            found_d = true;
             d = d_;
             break;
         }
@@ -136,14 +152,14 @@ void sa_algo::find_d()
 
 void sa_algo::find_bp()
 {
-    int left1 = d *  y_coor + d_p * x_coor;
-    int right1 = -radius * y_coor;
+    int left1 = d *  cy + d_p * cx;
+    int right1 = -cr * cy;
 
-    int left2 = d * x_coor - d_p * (1 + y_coor);
-    int right2 = -radius * x_coor;
+    int left2 = d * cx - d_p * (1 + cy);
+    int right2 = -cr * cx;
 
-    int mod = std::pow(prime, radius / (prime + e_dp));
-    
+    int mod = std::pow(prime, cr / (prime + e_dp));
+
     for (int bp=0; bp < mod; bp++)
     {
         int eqn1 = bp * left1 - right1;
@@ -151,6 +167,7 @@ void sa_algo::find_bp()
 
         if (eqn1 % mod == 0 && eqn2 % mod == 0)
         {
+            found_bp = true;
             b_p = bp;
             break;
         }
@@ -160,11 +177,11 @@ void sa_algo::find_bp()
 
 void sa_algo::find_points()
 {
-    b = (radius + b_p * d) / d_p;
-    a = (b * x_coor - b_p * (1 + y_coor)) / radius;
-    a_p = (b * y_coor + b_p * x_coor) / radius;
-    c = (d * x_coor - d_p * (1 + y_coor)) / radius;
-    c_p = (d_p * x_coor + d * y_coor) / radius;
+    b = (cr + b_p * d) / d_p;
+    a = (b * cx - b_p * (1 + cy)) / cr;
+    a_p = (b * cy + b_p * cx) / cr;
+    c = (d * cx - d_p * (1 + cy)) / cr;
+    c_p = (d_p * cx + d * cy) / cr;
 }
 
 void sa_algo::find_circle_matrix()
@@ -191,37 +208,37 @@ int sa_algo::get_prime()
 
 int sa_algo::get_radius(){
 
-    return radius1;
+    return radius;
 
 }
 
 int sa_algo::get_x(){
 
-    return x_coor1;
+    return x_coor;
 
 }
 
 int sa_algo::get_y(){
 
-    return y_coor1;
-
-}
-
-int sa_algo::get_radius2(){
-
-    return radius;
-
-}
-
-int sa_algo::get_x2(){
-
-    return x_coor;
-
-}
-
-int sa_algo::get_y2(){
-
     return y_coor;
+
+}
+
+int sa_algo::get_cr(){
+
+    return cr;
+
+}
+
+int sa_algo::get_cx(){
+
+    return cx;
+
+}
+
+int sa_algo::get_cy(){
+
+    return cy;
 
 }
 
@@ -257,9 +274,9 @@ int sa_algo::check_circle_equivalence()
 //getter methods
 void sa_algo::get_initial_variables()
 {
-    std::cout << "radius: " << radius << std::endl;
-    std::cout << "x-coordinate: " << x_coor << std::endl;
-    std::cout << "y-coordinate: " << y_coor << std::endl;
+    std::cout << "curve r: " << cr << std::endl;
+    std::cout << "curve x: " << cx << std::endl;
+    std::cout << "curve y: " << cy << std::endl;
     std::cout << "prime: " << prime << std::endl;
 }
 

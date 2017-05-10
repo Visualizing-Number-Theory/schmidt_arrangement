@@ -27,8 +27,10 @@ class sa_algo
 {
 private:
     //initial variables
-    float radius1, x_coor1, y_coor1;
-    int radius, x_coor, y_coor, prime, delta;
+    bool found_d, found_bp = false;
+
+    float radius, x_coor, y_coor;
+    int cr, cx, cy, prime, delta;
 
     //e_d, e_bp, e_dp
     int e_d, e_bp, e_dp;
@@ -48,10 +50,12 @@ private:
 
 public:
     //constructor
-    sa_algo(float r, float x, float y, int cr, int cs, int ct);
+    sa_algo(float r, float x, float y, int c_r, int s, int t);
     
     //check conditions
     int check_conditions();
+    int check_d_bp();
+    int check_dp();
     //int check_circle_equivalence();
     
     //setter methods
@@ -68,9 +72,9 @@ public:
     int get_x();
     int get_y();
 
-    int get_radius2();
-    int get_x2();
-    int get_y2();
+    int get_cr();
+    int get_cx();
+    int get_cy();
 
     
     //getter methods
