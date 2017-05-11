@@ -6,6 +6,8 @@
 
 void find_tile(sa_algo some_circle)
 {
+    //Switch (x,y) --> (y,x)
+    //2r 
     Tile some_tile(some_circle.get_radius(), some_circle.get_x(), some_circle.get_y(), some_circle.get_prime());
 
     //cout << some_tile.get_r() << " ";
@@ -26,7 +28,7 @@ void find_tile(sa_algo some_circle)
 
     some_tile.gxFunc();
 
-    cout << some_tile.get_gx() << endl;
+    //cout << some_tile.get_gx() << endl;
 
 }
 
@@ -57,19 +59,21 @@ void find_matrix(sa_algo some_circle)
 
             some_circle.find_bp();
             //some_circle.get_bp();
-        
-            if (some_circle.check_d_bp() == 0)
-            {
-                some_circle.find_points();
-                //some_circle.get_points();
             
+            if (some_circle.get_found_d() == 0 && some_circle.get_found_bp() == 0)
+            {
+            
+                some_circle.find_points();
+                //some_circle.get_points()
+
                 some_circle.find_circle_matrix();
                 some_circle.get_circle_matrix();
             }
             else
             {
-                std::cout << "no solution to congruence" << std::endl;
+                std::cout << "congruences could not be solved" << std::endl;
             }
+        
         }
         else
         {
@@ -163,6 +167,7 @@ int main(int argc, char **argv)
                     if (a_circle.get_cr() != 0 || a_circle.get_cx() != 0 || a_circle.get_cy() != 0)
                     {
                         std::cout << a_circle.get_cr() << " " << a_circle.get_cx() << " " << a_circle.get_cy() << " " << a_circle.get_prime() << std::endl;
+                        //std::cout << a_circle.get_radius() << " " << a_circle.get_x() << " " << a_circle.get_y() << std::endl;
                         find_tile(a_circle);
                         find_matrix(a_circle);
                         change = true;

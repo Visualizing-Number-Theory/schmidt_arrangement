@@ -27,8 +27,8 @@ class sa_algo
 {
 private:
     //initial variables
-    bool found_d, found_bp = false;
-
+    int found_d = 1;
+    int found_bp = 1;
     float radius, x_coor, y_coor;
     int cr, cx, cy, prime, delta;
 
@@ -42,10 +42,10 @@ private:
     int d, b_p;
     
     //points to find
-    int a, b, a_p, c, c_p;
+    float a, b, a_p, c, c_p;
     
     //matrix (store variables in array)
-    std::complex<int> A[2][2];
+    std::complex<float> A[2][2];
 
 
 public:
@@ -66,16 +66,6 @@ public:
     void find_bp();
     void find_points();
     void find_circle_matrix();
-
-    int get_prime();
-    int get_radius();
-    int get_x();
-    int get_y();
-
-    int get_cr();
-    int get_cx();
-    int get_cy();
-
     
     //getter methods
     void get_initial_variables();
@@ -86,6 +76,19 @@ public:
     void get_bp();
     void get_points();
     void get_circle_matrix();
+    
+    int get_prime();
+    int get_radius();
+    int get_x();
+    int get_y();
+
+    int get_cr();
+    int get_cx();
+    int get_cy();
+
+    int get_found_d();
+    int get_found_bp();
+
     
     //destructor
     ~sa_algo();

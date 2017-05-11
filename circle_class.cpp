@@ -56,7 +56,7 @@ int sa_algo::check_conditions()
 
 int sa_algo::check_d_bp()
 {
-    if (found_d == false || found_bp == false)
+    if (d == 0 || b_p == 0)
     {
         return 1;
     }
@@ -143,8 +143,8 @@ void sa_algo::find_d()
 
         if (eqn1 %  mod == 0 && eqn2 % mod == 0)
         {
-            found_d = true;
             d = d_;
+            found_d = 0;
             break;
         }
     }
@@ -152,13 +152,14 @@ void sa_algo::find_d()
 
 void sa_algo::find_bp()
 {
+
     int left1 = d *  cy + d_p * cx;
     int right1 = -cr * cy;
 
     int left2 = d * cx - d_p * (1 + cy);
     int right2 = -cr * cx;
 
-    int mod = std::pow(prime, cr / (prime + e_dp));
+    int mod = std::pow(prime, (cr / prime) + e_dp);
 
     for (int bp=0; bp < mod; bp++)
     {
@@ -167,8 +168,8 @@ void sa_algo::find_bp()
 
         if (eqn1 % mod == 0 && eqn2 % mod == 0)
         {
-            found_bp = true;
             b_p = bp;
+            found_bp = 0;
             break;
         }
     }
@@ -177,19 +178,19 @@ void sa_algo::find_bp()
 
 void sa_algo::find_points()
 {
-    b = (cr + b_p * d) / d_p;
-    a = (b * cx - b_p * (1 + cy)) / cr;
-    a_p = (b * cy + b_p * cx) / cr;
-    c = (d * cx - d_p * (1 + cy)) / cr;
-    c_p = (d_p * cx + d * cy) / cr;
+    b = float((cr + b_p * d)) / d_p;
+    a = float((b * cx - b_p * (1 + cy))) / cr;
+    a_p = float((b * cy + b_p * cx)) / cr;
+    c = float((d * cx - d_p * (1 + cy))) / cr;
+    c_p = float((d_p * cx + d * cy)) / cr;
 }
 
 void sa_algo::find_circle_matrix()
 {
-    std::complex<int> a_11(a, a_p);
-    std::complex<int> a_12(c, c_p);
-    std::complex<int> a_21(b, b_p);
-    std::complex<int> a_22(d, d_p);
+    std::complex<float> a_11(a, a_p);
+    std::complex<float> a_12(c, c_p);
+    std::complex<float> a_21(b, b_p);
+    std::complex<float> a_22(d, d_p);
 
     //MatrixXcf X(2,2); //How to declare a complex matrix
     //X(0,0) = a_11;    //How to assign to complex matrix=
@@ -242,6 +243,15 @@ int sa_algo::get_cy(){
 
 }
 
+int sa_algo::get_found_d()
+{
+    return found_d;
+}
+
+int sa_algo::get_found_bp()
+{
+    return found_bp;
+}
 
 /*
 int sa_algo::check_circle_equivalence()
