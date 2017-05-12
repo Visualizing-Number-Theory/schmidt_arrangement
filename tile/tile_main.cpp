@@ -1,40 +1,61 @@
 #include <iostream>
-//#include "tile.hpp"
-#include "tile.cpp"
+#include "tile.hpp"
+//#include "tile.cpp"
 
-using namespace std;
 
-void print_members(Tile some_tile)
+void toppling(Tile a_tile)
 {
-    //cout << some_tile.get_r() << " ";
-    //cout << some_tile.get_c1() << " ";
-    //cout << some_tile.get_c2() << " ";
-    //cout << some_tile.get_curv() << " " << endl;
+    int i,j;
 
-    //cout << std::endl;
+    for (i = 1; i < a_tile.l_lat.size() - 1; i++)
+    {
+        for (j = 1; j < a_tile.l_lat.size() - 1; j++)
+        {
+            if (a_tile.l_lat[i][j] > 1)
+            {
+                a_tile.topple();
+                a_tile.counter++;
 
-    //some_tile.get_Ac();
+                //a_tile.get_l_lat();
 
-    //cout << std::endl;
-
-    some_tile.xTranspose();
-    //some_tile.get_xT();
-
-    //std::cout << std::endl;
-
-    some_tile.gxFunc();
-
-    cout << some_tile.get_gx() << endl;
-
+                i = 1;
+                j = 1;
+            }
+        }
+    }
 }
+
+void find_pattern(Tile a_tile)
+{
+    a_tile.find_Ac();
+    a_tile.get_Ac();
+
+    int gx = a_tile.find_gx(1,1);
+    std::cout << gx << std::endl;
+
+    a_tile.find_sublat();
+    a_tile.get_sublat();
+
+    a_tile.laplacian();
+    a_tile.get_l_lat();
+
+    int counter = 0;
+
+    toppling(a_tile);
+
+
+    a_tile.get_l_lat();
+}
+    
 
 
 int main()
 {
     // Test
-    Tile new_tile(1, 1, 1, 1);          //r, c1, c2, curv
-
-    print_members(new_tile);
+    // SWAP c1,c2 --> c2,c1 --> takes place in constructor
+    Tile new_tile(.5, 0, .5, 2);          //r, c2, c1, curv
+    
+    find_pattern(new_tile);
 
     return 0;
 }
