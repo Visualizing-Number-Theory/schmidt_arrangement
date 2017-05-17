@@ -86,6 +86,7 @@ void Tile::topple()
                 l_lat[i][j]--;
  
                 // Increase chip value at adjacent positions by 1
+                // Right boundary
                 if (j + 1 == l_lat.size())
                 {
                     l_lat[i][1]++;
@@ -95,15 +96,17 @@ void Tile::topple()
                     l_lat[i][j+1]++;
                 }
 
+                // Left boundary
                 if (j - 1 == 0)
                 {
-                    l_lat[l_lat.size() - 1][j]++;
+                    l_lat[i][l_lat.size()-1]++;
                 }
                 else
                 {
                     l_lat[i][j-1]++;
                 }
 
+                // Top boundary
                 if (i + 1 == l_lat.size())
                 {
                     l_lat[1][j]++;
@@ -113,9 +116,10 @@ void Tile::topple()
                     l_lat[i+1][j]++;
                 }
 
+                // Bottom boundary
                 if (i - 1 == 0)
                 {
-                    l_lat[i][l_lat.size() - 1]++;
+                    l_lat[l_lat.size() - 1][j]++;
                 }
                 else
                 {

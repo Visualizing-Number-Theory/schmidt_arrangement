@@ -28,15 +28,17 @@ void toppling(Tile a_tile)
 void find_pattern(Tile a_tile)
 {
     a_tile.find_Ac();
-    a_tile.get_Ac();
+    //a_tile.get_Ac();
 
     int gx = a_tile.find_gx(1,1);
-    std::cout << gx << std::endl;
+    //std::cout << gx << std::endl;
 
     a_tile.find_sublat();
+    std::cout << "Prelaplacian" << std::endl;
     a_tile.get_sublat();
 
     a_tile.laplacian();
+    std::cout << "lap" << std::endl;
     a_tile.get_l_lat();
 
     int counter = 0;
