@@ -31,6 +31,8 @@ int Tile::find_gx(int x1, int x2)
 {
     double tmp_arr0[1][2];
 
+    std::cout << x1 << " " << x2 << std::endl;
+
     tmp_arr0[0][0] = .5 * x1 * Ac[0][0] + .5 * x2 * Ac[1][0];
     tmp_arr0[0][1] = .5 * x1 * Ac[0][1] + .5 * x2 * Ac[1][1];
 
@@ -63,12 +65,33 @@ void Tile::laplacian()
 {
     l_lat = subLat;
 
+    for (int i = 0; i < l_lat.size(); i++)
+    {
+        for (int j = 0; j < l_lat[i].size(); j++)
+        {
+
+            l_lat[i][j] = 0;
+        }
+    }
+
+    for (int i = 0; i < l_lat.size(); i++)
+    {
+        for (int j = 0; j < l_lat[i].size(); j++)
+        {
+
+            std::cout << l_lat[i][j] << std::endl;
+        }
+    }
+
+
     for (int i = 1; i < l_lat.size() - 1; i++)
     {
         for (int j = 1; j < l_lat[i].size() - 1; j++)
         {
+
             l_lat[i][j] = (subLat[i][j-1] - subLat[i][j]) + (subLat[i-1][j] - subLat[i][j])
             + (subLat[i][j+1] - subLat[i][j]) + (subLat[i+1][j] - subLat[i][j]);
+
         }
     }
 }
@@ -80,10 +103,10 @@ void Tile::topple()
     {
         for (int j = 1; j < l_lat[i].size() - 1; j++)
         {
-            if (l_lat[i][j] > 1)
+            if (l_lat[i][j] > 1) //CHANGED FROM l_lat[i][j] > 1
             {
                 // Decrease chip value at x by 1
-                l_lat[i][j]--;
+                l_lat[i][j] = l_lat[i][j] - 4; //CHANGED FROM l_lat[i][j]--
  
                 // Increase chip value at adjacent positions by 1
                 // Right boundary

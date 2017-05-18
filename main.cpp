@@ -4,32 +4,53 @@
 #include "circle_group.hpp"
 #include "tile.hpp"
 
-void find_tile(sa_algo some_circle)
+Tile toppling(Tile a_tile)
 {
-    //Switch (x,y) --> (y,x)
-    //2r 
-    Tile some_tile(some_circle.get_radius(), some_circle.get_x(), some_circle.get_y(), some_circle.get_prime());
+    int i,j;
 
-    //cout << some_tile.get_r() << " ";
-    //cout << some_tile.get_c1() << " ";
-    //cout << some_tile.get_c2() << " ";
-    //cout << some_tile.get_curv() << " " << endl;
+    for (i = 1; i < a_tile.l_lat.size() - 1; i++)
+    {
+        for (j = 1; j < a_tile.l_lat.size() - 1; j++)
+        {
+            if (a_tile.l_lat[i][j] > 1)
+            {
+                a_tile.topple();
+                a_tile.counter++;
 
-    //cout << std::endl;
+                i = 1;
+                j = 1;
+            }
+        }
+    }
 
-    //some_tile.get_Ac();
+    return a_tile;
+}
 
-    //cout << std::endl;
+void find_pattern(sa_algo a_circle)
+{
+    Tile a_tile(a_circle.get_radius() / 700.0 , a_circle.get_x() / 700.0, a_circle.get_y() / 700.0, a_circle.get_cr());
 
-    some_tile.xTranspose();
-    //some_tile.get_xT();
 
-    //std::cout << std::endl;
+    a_tile.find_Ac();
+    a_tile.get_Ac();
 
-    some_tile.gxFunc();
+    a_tile.find_sublat();
+    std::cout << "PreLaplacian" << std::endl;
+    a_tile.get_sublat();
 
-    //cout << some_tile.get_gx() << endl;
+    a_tile.laplacian();
+    std::cout << "PostLaplacian" << std::endl;
+    a_tile.get_l_lat();
 
+    int counter = 0;
+
+    Tile new_tile;
+
+    new_tile = toppling(a_tile);
+
+    new_tile.get_l_lat();
+
+    //new_tile.draw_pattern();
 }
 
 void find_matrix(sa_algo some_circle)
@@ -167,14 +188,14 @@ int main(int argc, char **argv)
                     if (a_circle.get_cr() != 0 || a_circle.get_cx() != 0 || a_circle.get_cy() != 0)
                     {
                         std::cout << a_circle.get_cr() << " " << a_circle.get_cx() << " " << a_circle.get_cy() << " " << a_circle.get_prime() << std::endl;
-                        //std::cout << a_circle.get_radius() << " " << a_circle.get_x() << " " << a_circle.get_y() << std::endl;
-                        find_tile(a_circle);
+                        //std::cout << a_circle.get_radius() / 700.0  << " " << a_circle.get_x() / 700.0 << " " << a_circle.get_y() / 700.0 << std::endl;
+                        find_pattern(a_circle);
                         find_matrix(a_circle);
                         change = true;
                     }
                     else
                     {
-                        change = false;
+                        change = false; 
                     }
                 }
                 else{

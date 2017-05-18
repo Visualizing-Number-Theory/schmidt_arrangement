@@ -28,10 +28,7 @@ void toppling(Tile a_tile)
 void find_pattern(Tile a_tile)
 {
     a_tile.find_Ac();
-    //a_tile.get_Ac();
-
-    int gx = a_tile.find_gx(1,1);
-    //std::cout << gx << std::endl;
+    a_tile.get_Ac();
 
     a_tile.find_sublat();
     std::cout << "Prelaplacian" << std::endl;
@@ -55,7 +52,9 @@ int main()
 {
     // Test
     // SWAP c1,c2 --> c2,c1 --> takes place in constructor
-    Tile new_tile(.5, 0, .5, 2);          //r, c2, c1, curv
+    //Tile new_tile(.5, 0, .5, 2);          //r, c2, c1, curv
+
+    Tile new_tile(1.0/3.0, 1.0/3.0, 2.0/3.0, 3);
     
     find_pattern(new_tile);
 

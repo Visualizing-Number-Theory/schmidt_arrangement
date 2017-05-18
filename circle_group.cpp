@@ -12,15 +12,15 @@ CircleGroup::CircleGroup() {
     y = 0;
     dist = 1;
     //r is curvature
-    for(int r = 1; r < 20; r++){
-        for(int s = 0; s < 1.5*r; s++){
-            for(int t = 0; t < 1.5*r; t++){
+    for(int r = 1; r < 19; r++){
+        for(int s = 0; s < 3*r; s++){
+            for(int t = 0; t < 3*r; t++){
                 if((s*s + t*t - t) % r == 0 % r){
                     float xcoor = 700*(2*s)/(2*r);
                     float ycoor = 700*(2*t-1)/(2*r);
                     float radi = 700*1/(2*r);
                     
-                    circles.push_back(sa_algo(radi, xcoor, ycoor, r, s, t));
+                    circles.push_back(sa_algo(radi, xcoor, ycoor, r, t, s));
                 }
             }
         }
@@ -35,6 +35,8 @@ void CircleGroup::zoom(float x1, float x2, float y1, float y2){
     x2 = (x2/700)*dist + x;
     y1 = (y1/700)*dist + y;
     y2 = (y2/700)*dist + y;
+
+    std::cout << "x1: " << x1 << "  x2: " << x2 << "  y1: " << y1 << "  y2: " << y2 << std::endl;
 
     if(x1 < 0){
         x1 = 0;
@@ -62,8 +64,7 @@ void CircleGroup::zoom(float x1, float x2, float y1, float y2){
         y2 = 1;
     }
 
-    x = x1;
-    y = y1;
+
 
     if(x2<x1){
         float tmp = x2;
@@ -77,20 +78,26 @@ void CircleGroup::zoom(float x1, float x2, float y1, float y2){
         y1 = tmp;
     }
 
-    if((x2-x1)>=(y2-y1)){
-        dist = x2-x1;
+    if(x2-x1 < .05 && y2-y1 < .05){
+        cout<<"Can't zoom in that far!"<<endl;
     }else{
-        dist = y2-y1;
+        if((x2-x1)>=(y2-y1)){
+            dist = x2-x1;
+        }else{
+            dist = y2-y1;
+        }
+        x = x1;
+        y = y1;
     }
 
     for(int r = 1; r < 20/dist; r++){
-        for(int s = x1*r; s < (x2+.5*dist)*r; s++){
-            for(int t = y1*r; t < (y2+.5*dist)*r; t++){
+        for(int s = x*r; s < (x + 1.5*dist)*r; s++){
+            for(int t = y*r; t < (y+1.5*dist)*r; t++){
                 if((s*s + t*t - t) % r == 0 % r){
-                    float xcoor = (700/dist)*(2*s)/(2*r)-700*x1/dist;
-                    float ycoor = (700/dist)*(2*t-1)/(2*r)-700*y1/dist;
+                    float xcoor = (700/dist)*(2*s)/(2*r)-700*x/dist;
+                    float ycoor = (700/dist)*(2*t-1)/(2*r)-700*y/dist;
                     float radi = (700/dist)*1/(2*r);
-                    if(xcoor + radi > x1 or xcoor - radi < x2 or ycoor + radi > y1 or ycoor - radi < y2){
+                    if(xcoor + radi > x or xcoor - radi < x + dist or ycoor + radi > y or ycoor - radi < y + dist){
 
                         circles.push_back(sa_algo(radi, xcoor, ycoor, r, s, t));
                     }
