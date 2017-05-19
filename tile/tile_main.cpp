@@ -3,7 +3,6 @@
 //#include "tile.cpp"
 
 
-
 Tile toppling(Tile a_tile)
 {
     int i,j;
@@ -38,6 +37,9 @@ Tile toppling(Tile a_tile)
     return a_tile;
 }
 
+
+
+
 void find_pattern(Tile a_tile)
 {
     a_tile.find_Ac();
@@ -46,6 +48,8 @@ void find_pattern(Tile a_tile)
     a_tile.find_sublat();
     std::cout << "Prelaplacian" << std::endl;
     a_tile.get_sublat();
+
+    
 
     a_tile.laplacian();
     std::cout << "Postlaplacian" << std::endl;
@@ -59,9 +63,9 @@ void find_pattern(Tile a_tile)
 
     new_tile.get_l_lat();
 
+
     
 }
-    
 
 
 int main()
@@ -70,9 +74,11 @@ int main()
     // SWAP c1,c2 --> c2,c1 --> takes place in constructor
     //Tile new_tile(.5, 0, .5, 2);          //r, c2, c1, curv
 
-    Tile new_tile(1.0/3.0, 1.0/3.0, 2.0/3.0, 3);
+    Tile new_tile(1, 3, 2, 3, 1, 3, 3);
+    //new_tile.find_Ac();
+    //new_tile.find_gx(0,1);
     
-    //find_pattern(new_tile);
+    find_pattern(new_tile);
 
     return 0;
 }

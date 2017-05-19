@@ -16,6 +16,7 @@
 //#include <Eigen/Dense>  //<-- use if matrix mul/add is needed
 #include <complex>
 #include <boost/rational.hpp>
+#include <pthread.h>
 
 //using namespace Eigen;  //uncomment if using Eigen
 

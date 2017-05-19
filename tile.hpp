@@ -1,21 +1,27 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+#include <boost/rational.hpp>
 #include "circle_class.hpp"
- 
+
 #ifndef TILE_H
 #define TILE_H
- 
+
 class Tile
 {
     private:
         // Members
-        double r;               // radius
-        double c1, c2;          // center (c1, c2)
+        int num_r;
+        int den_r;
+
+        int num_c1;
+        int den_c1;
+
+        int num_c2;
+        int den_c2;
  
-        int curv;               // curvature
- 
-        double Ac[2][2];        // 2x2 matrix
+        int curv;               
+        boost::rational<int> Ac[2][2];        // 2x2 matrix
 
         std::vector <std::vector <int> > subLat;
 
@@ -23,14 +29,13 @@ class Tile
  
     public:
         std::vector <std::vector <int> > l_lat;
+        std::vector <std::vector <int> > ct;    // Check topple lattice: 0 = not toppled; 1 = toppled
         int counter = 0;
-        // Members
-        //int chips;              // Will obtain this value from delta g(x)
-                                  // Isn't this the same as lp? 05/03/17
- 
-        // Methods
+        bool class_check = false;
+        
+
         // Constructor
-        Tile(double newr = 0, double newc1 = 0, double newc2 = 0, int newcurv = 0);       // Removed the scalars 05/02/17
+        Tile(int nr=0, int dr=0, int nc1=0, int dc1=0, int nc2=0, int dc2=0, int newcurv=0);
         
 
         //setters
@@ -45,8 +50,14 @@ class Tile
         void get_Ac();
         void get_sublat();
         void get_l_lat();
-        void draw_pattern();
 
+        
+        // Methods
+        bool check_topple();
+        void *draw_pattern();
+
+        
+        // Destructor
         ~Tile();
  
 };

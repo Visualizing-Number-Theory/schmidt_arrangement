@@ -5,9 +5,12 @@ using namespace boost;
 
 int main()
 {
-    rational<int> r(1,2);
-    rational<int> sharon(1,1);
-    std::cout << r + sharon  << std::endl;
+    int num = 1;
+    int denom = 3;
+
+    rational<int> r(num,denom);
+    //rational<double> sharon(1,1);
+    std::cout << r << std::endl;
 
 
 }

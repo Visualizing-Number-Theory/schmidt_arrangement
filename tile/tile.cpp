@@ -6,16 +6,25 @@ using namespace boost;
  
 // Constructor with parameters
 // Declare default values so we don't need two constructors
-Tile::Tile(double newr, double newc1, double newc2, int newcurv)
+Tile::Tile(int nr, int dr, int nc1, int dc1, int nc2, int dc2, int newcurv)
 {
-    //r(newr,1);
-    //c1(newc1,1);
-    //c2(newc2,1);
+    num_r = nr;
+    den_r = dr;
 
-    //r = newr;
-    //c1 = newc2;
-    //c2 = newc1;
-    //curv = 4 * newcurv;
+    num_c1 = nc1;
+    den_c1 = dc1;
+
+    num_c2 = nc2;
+    den_c2 = dc2;
+
+    curv = 4 * newcurv;
+
+    /*
+    r = newr;
+    c1 = newc2;
+    c2 = newc1;
+    curv = 4 * newcurv;
+    */
 
     std::vector <std::vector <int> > vec(curv+2, std::vector<int>(curv+2));
 
@@ -25,48 +34,52 @@ Tile::Tile(double newr, double newc1, double newc2, int newcurv)
 Tile::~Tile() {}
 
 
-/*
+
 //setters
 void Tile::find_Ac()
 {
-    rational<int> one_half(1,2);
+    rational<int> r(num_r, den_r);
+    rational<int> c1(num_c1, den_c2);
+    rational<int> c2(num_c2, den_c2);
+    rational<int> one_half(1, 2);
+
     Ac[0][0] = one_half * (r + c1);
-    Ac[1][0] = .5 * c2;
-    Ac[0][1] = .5 * c2;
-    Ac[1][1] = .5 * (r - c1);
+    Ac[1][0] = one_half * c2;
+    Ac[0][1] = one_half * c2;
+    Ac[1][1] = one_half * (r - c1);
+
+    std::cout << "Ac: " << Ac[0][0] << " " << Ac[0][1] << std::endl;
+    std::cout << "    " << Ac[1][0] << " " << Ac[1][1] << std::endl;
 }
+
 
 int Tile::find_gx(int x1, int x2)
 {
-    
-    double tmp_arr0[1][2];
+    rational<int> half_xT[1][2];
+    rational<int> one_half(1, 2);
 
-    tmp_arr0[0][0] = .5 * x1 * Ac[0][0] + .5 * x2 * Ac[1][0];
-    tmp_arr0[0][1] = .5 * x1 * Ac[0][1] + .5 * x2 * Ac[1][1];
+    half_xT[0][0] = one_half * x1;
+    half_xT[0][1] = one_half * x2;
+    rational<int> xT_Ac[1][2];
 
-    std::cout << tmp_arr0[0][0] << " " << tmp_arr0[0][1] << std::endl;
+    xT_Ac[0][0] = half_xT[0][0] * Ac[0][0] + half_xT[0][1] * Ac[1][0];
+    xT_Ac[0][1] = half_xT[0][0] * Ac[0][1] + half_xT[0][1] * Ac[1][1];
 
-    double tmp_int = x1 * tmp_arr0[0][0] + x2 * tmp_arr0[0][1];
+    //std::cout << xT_Ac[0][0] << " " << xT_Ac[0][1] << std::endl;
 
-    std::cout << tmp_int << " " << floor(tmp_int) << std::endl;
+    rational<int> xT_Ac_x[1][1];
 
-        
-        // ADDING THIS CODE 12:44PM 05/18/17
-        if (abs(tmp_int - ceil(tmp_int)) < 0.000001)
-        {
-            return ceil(tmp_int);
-        }
+    xT_Ac_x[0][0] = xT_Ac[0][0] * x1 + xT_Ac[0][1] * x2;
 
-        else if (abs(tmp_int - floor(tmp_int)) < 0.000001)
-        {
-            return floor(tmp_int);
-            
-        }
-        
-        
+    //std::cout << xT_Ac_x[0][0] << std::endl;
 
-    return floor(tmp_int);
+    int g = floor((float)xT_Ac_x[0][0].numerator()/(float)xT_Ac_x[0][0].denominator());
+
+    return g;
+
+    //std::cout << "g(" << x1 << ", " << x2 << "): " << g << std::endl;
 }
+
 
 void Tile::find_sublat()
 {
@@ -87,6 +100,8 @@ void Tile::find_sublat()
         start_x2 = -1;
     }
 }
+
+
 
 void Tile::laplacian()
 {
@@ -161,6 +176,8 @@ void Tile::topple()
     }
 }
 
+
+
 //getters
 void Tile::get_Ac()
 {
@@ -220,6 +237,7 @@ void Tile::get_sublat()
     std::cout << ")" << std::endl;
 }
 
+
 void Tile::get_l_lat()
 {
     std::cout << "(" << std::endl;
@@ -245,4 +263,4 @@ void Tile::get_l_lat()
 
     std::cout << ")" << std::endl;
 }
-*/
+

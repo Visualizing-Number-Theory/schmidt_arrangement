@@ -5,20 +5,23 @@
  
 #ifndef TILE_H
 #define TILE_H
-
-using namespace boost;
  
 class Tile
 {
     private:
         // Members
-        boost::rational<int> r;               // radius
-        boost::rational<int> c1;
-        boost::rational<int> c2;          // center (c1, c2)
+        int num_r;
+        int den_r;
+
+        int num_c1;
+        int den_c1;
+
+        int num_c2;
+        int den_c2;
  
         int curv;               // curvature
  
-        double Ac[2][2];        // 2x2 matrix
+        boost::rational<int> Ac[2][2];        // 2x2 matrix
 
         std::vector <std::vector <int> > subLat;
 
@@ -33,10 +36,11 @@ class Tile
  
         // Methods
         // Constructor
-        Tile(double newr = 0, double newc1 = 0, double newc2 = 0, int newcurv = 0);       // Removed the scalars 05/02/17
+        Tile(int nr=0, int dr=0, int nc1=0, int dc1=0, int nc2=0, int dc2=0, int newcurv=0);
         
 
         //setters
+        
         void find_Ac();
         int find_gx(int x1, int x2);
         void find_sublat();
@@ -48,6 +52,7 @@ class Tile
         void get_Ac();
         void get_sublat();
         void get_l_lat();
+        
 
         ~Tile();
  

@@ -4,147 +4,92 @@
 #include "circle_group.hpp"
 #include "tile.hpp"
 
-Tile toppling(Tile a_tile)
+Tile* toppling(Tile* a_tile)
 {
+    bool check = false;
     int i,j;
 
-    for (i = 1; i < a_tile.l_lat.size() - 1; i++)
+    for (i = 1; i < a_tile->l_lat.size() - 1; i++)
     {
-        for (j = 1; j < a_tile.l_lat.size() - 1; j++)
+        for (j = 1; j < a_tile->l_lat.size() - 1; j++)
         {
-            if (a_tile.l_lat[i][j] > 1)
+            if (a_tile->l_lat[i][j] > 1)
             {
-                a_tile.topple();
-                a_tile.counter++;
+                a_tile->topple();
+                a_tile->counter++;
 
-                std::cout << "Number of times toppled: " << a_tile.counter << std::endl;
+                   
+                std::cout << "Number of times toppled: " << a_tile->counter << std::endl;
 
-                if (a_tile.counter > 100)
+
+                check = a_tile->check_topple();
+
+                if (check == true)
                 {
                     break;
                 }
-
+                
                 i = 1;
                 j = 1;
             }
         }
-
-        if (a_tile.counter > 100)
+        if (check == true)
         {
             break;
         }
+
     }
 
+    if (check != true)
+    {
+        a_tile->class_check = true;
+    }
     return a_tile;
+}
+
+void* PatternDraw(void* new_tile){
+
+    Tile *t = (Tile*) new_tile;
+    t->draw_pattern();
+    delete new_tile;
+    pthread_exit(NULL);
+
 }
 
 void find_pattern(sa_algo a_circle)
 {
-    Tile a_tile(a_circle.get_radius() / 700.0 , a_circle.get_x() / 700.0, a_circle.get_y() / 700.0, a_circle.get_cr());
+    Tile* a_tile = new Tile(1, a_circle.get_cr(), a_circle.get_cx(), a_circle.get_cr(), a_circle.get_cy(), a_circle.get_cr(), a_circle.get_cr());
 
 
-    a_tile.find_Ac();
-    a_tile.get_Ac();
+    a_tile->find_Ac();
+    a_tile->get_Ac();
 
-    a_tile.find_sublat();
+    a_tile->find_sublat();
     std::cout << "PreLaplacian" << std::endl;
-    a_tile.get_sublat();
+    a_tile->get_sublat();
 
-    a_tile.laplacian();
-    std::cout << "PostLaplacian" << std::endl;
-    a_tile.get_l_lat();
+    a_tile->laplacian();
+    std::cout << "PostLaplacian (not fully toppled)" << std::endl;
+    a_tile->get_l_lat();
 
-    int counter = 0;
-
-    Tile new_tile;
+    Tile* new_tile;
 
     new_tile = toppling(a_tile);
 
-    new_tile.get_l_lat();
-
-    //new_tile.draw_pattern();
-}
-
-void find_matrix(sa_algo some_circle)
-{
-
-    //int check = some_circle.check_conditions();
-    int prime = some_circle.get_prime();
-
-    //std::cout << check << " " << prime << std::endl;
-    /*
-    if (check == 0 && prime != -1)
+    if (new_tile->class_check == true)
     {
-        some_circle.find_ed();
-        //some_circle.get_ed();
+        new_tile->get_l_lat();
 
-        some_circle.find_ebp_edp();
-        //some_circle.get_ebp_edp();
-
-        some_circle.find_dp();
-        //some_circle.get_dp();
-        
-        if (some_circle.check_dp() == 0)
-        {
-
-            some_circle.find_d();
-            //some_circle.get_d();
-
-            some_circle.find_bp();
-            //some_circle.get_bp();
-            
-            if (some_circle.get_found_d() == 0 && some_circle.get_found_bp() == 0)
-            {
-            
-                some_circle.find_points();
-                //some_circle.get_points()
-
-                some_circle.find_circle_matrix();
-                some_circle.get_circle_matrix();
-            }
-            else
-            {
-                std::cout << "congruences could not be solved" << std::endl;
-            }
-        
-        }
-        else
-        {
-            std::cout << "d_p = 0: cannot calculate b point" << std::endl;
-        }
+        pthread_t *thread = new pthread_t;
+        pthread_create(thread, NULL, PatternDraw, (void*)a_tile);
     }
     else
     {
-        std::cout << "One or more conditions do not hold" << std::endl;
+        std::cout << "Does not stabilize." << std::endl;
     }
-    */
-
-    some_circle.find_ed();
-        //some_circle.get_ed();
-
-    some_circle.find_ebp_edp();
-        //some_circle.get_ebp_edp();
-
-    some_circle.find_dp();
-        //some_circle.get_dp();
-        //
-    some_circle.find_d();
-            //some_circle.get_d();
-
-    some_circle.find_bp();
-            //some_circle.get_bp();
-
-    some_circle.find_points();
-                //some_circle.get_points()
-
-    some_circle.find_circle_matrix();
-    some_circle.get_circle_matrix();
-
-    //some_circle.check_circle_equivalence();
-
-
 
     
+    //new_tile.draw_pattern();
 }
 
 int main(int argc, char **argv)
@@ -229,12 +174,12 @@ int main(int argc, char **argv)
                         std::cout << a_circle.get_cr() << " " << a_circle.get_cx() << " " << a_circle.get_cy() << " " << a_circle.get_prime() << std::endl;
                         //std::cout << a_circle.get_radius() / 700.0  << " " << a_circle.get_x() / 700.0 << " " << a_circle.get_y() / 700.0 << std::endl;
                         find_pattern(a_circle);
-                        find_matrix(a_circle);
+                        //find_matrix(a_circle);
                         change = true;
                     }
                     else
                     {
-                        change = false; 
+                        change = false;
                     }
                 }
                 else{
