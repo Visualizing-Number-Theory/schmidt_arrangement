@@ -44,7 +44,7 @@ sa_algo::sa_algo(float r, float x, float y, int c_r, int s, int t)
 //make sure input is valid
 int sa_algo::check_conditions()
 {
-    int right_var = cx * cx + cy + cy * cy;
+    int right_var = cx * cx - cy + cy * cy;
     if (right_var % cr != 0)
     {
         //throw std::invalid_argument("The condition (1) does not hold.");
@@ -253,7 +253,7 @@ int sa_algo::get_found_bp()
     return found_bp;
 }
 
-/*
+
 int sa_algo::check_circle_equivalence()
 {
     std::tuple<int, int, int> coordinates;
@@ -279,7 +279,7 @@ int sa_algo::check_circle_equivalence()
     }
     return 0;
 }
-*/
+
 
 //getter methods
 void sa_algo::get_initial_variables()

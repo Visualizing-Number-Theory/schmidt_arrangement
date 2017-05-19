@@ -15,6 +15,7 @@
 #include <tuple>
 //#include <Eigen/Dense>  //<-- use if matrix mul/add is needed
 #include <complex>
+#include <boost/rational.hpp>
 
 //using namespace Eigen;  //uncomment if using Eigen
 
@@ -56,7 +57,7 @@ public:
     int check_conditions();
     int check_d_bp();
     int check_dp();
-    //int check_circle_equivalence();
+    int check_circle_equivalence();
     
     //setter methods
     void find_ed();

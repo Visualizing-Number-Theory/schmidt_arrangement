@@ -1,16 +1,20 @@
 #include <iostream>
 #include <vector>
-#include <math.h>
+#include <cmath>
+#include <boost/rational.hpp>
  
 #ifndef TILE_H
 #define TILE_H
+
+using namespace boost;
  
 class Tile
 {
     private:
         // Members
-        double r;               // radius
-        double c1, c2;          // center (c1, c2)
+        boost::rational<int> r;               // radius
+        boost::rational<int> c1;
+        boost::rational<int> c2;          // center (c1, c2)
  
         int curv;               // curvature
  

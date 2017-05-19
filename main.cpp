@@ -17,9 +17,21 @@ Tile toppling(Tile a_tile)
                 a_tile.topple();
                 a_tile.counter++;
 
+                std::cout << "Number of times toppled: " << a_tile.counter << std::endl;
+
+                if (a_tile.counter > 100)
+                {
+                    break;
+                }
+
                 i = 1;
                 j = 1;
             }
+        }
+
+        if (a_tile.counter > 100)
+        {
+            break;
         }
     }
 
@@ -56,11 +68,11 @@ void find_pattern(sa_algo a_circle)
 void find_matrix(sa_algo some_circle)
 {
 
-    int check = some_circle.check_conditions();
+    //int check = some_circle.check_conditions();
     int prime = some_circle.get_prime();
 
     //std::cout << check << " " << prime << std::endl;
-
+    /*
     if (check == 0 && prime != -1)
     {
         some_circle.find_ed();
@@ -105,6 +117,33 @@ void find_matrix(sa_algo some_circle)
     {
         std::cout << "One or more conditions do not hold" << std::endl;
     }
+    */
+
+    some_circle.find_ed();
+        //some_circle.get_ed();
+
+    some_circle.find_ebp_edp();
+        //some_circle.get_ebp_edp();
+
+    some_circle.find_dp();
+        //some_circle.get_dp();
+        //
+    some_circle.find_d();
+            //some_circle.get_d();
+
+    some_circle.find_bp();
+            //some_circle.get_bp();
+
+    some_circle.find_points();
+                //some_circle.get_points()
+
+    some_circle.find_circle_matrix();
+    some_circle.get_circle_matrix();
+
+    //some_circle.check_circle_equivalence();
+
+
+
     
 }
 

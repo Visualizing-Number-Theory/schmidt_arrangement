@@ -1,15 +1,21 @@
 #include <iostream>
 #include "tile.hpp"
+
+using namespace boost;
  
  
 // Constructor with parameters
 // Declare default values so we don't need two constructors
 Tile::Tile(double newr, double newc1, double newc2, int newcurv)
 {
-    r = newr;
-    c1 = newc2;
-    c2 = newc1;
-    curv = 4 * newcurv;
+    //r(newr,1);
+    //c1(newc1,1);
+    //c2(newc2,1);
+
+    //r = newr;
+    //c1 = newc2;
+    //c2 = newc1;
+    //curv = 4 * newcurv;
 
     std::vector <std::vector <int> > vec(curv+2, std::vector<int>(curv+2));
 
@@ -18,10 +24,13 @@ Tile::Tile(double newr, double newc1, double newc2, int newcurv)
 
 Tile::~Tile() {}
 
+
+/*
 //setters
 void Tile::find_Ac()
 {
-    Ac[0][0] = .5 * (r + c1);
+    rational<int> one_half(1,2);
+    Ac[0][0] = one_half * (r + c1);
     Ac[1][0] = .5 * c2;
     Ac[0][1] = .5 * c2;
     Ac[1][1] = .5 * (r - c1);
@@ -29,14 +38,32 @@ void Tile::find_Ac()
 
 int Tile::find_gx(int x1, int x2)
 {
+    
     double tmp_arr0[1][2];
-
-    std::cout << x1 << " " << x2 << std::endl;
 
     tmp_arr0[0][0] = .5 * x1 * Ac[0][0] + .5 * x2 * Ac[1][0];
     tmp_arr0[0][1] = .5 * x1 * Ac[0][1] + .5 * x2 * Ac[1][1];
 
+    std::cout << tmp_arr0[0][0] << " " << tmp_arr0[0][1] << std::endl;
+
     double tmp_int = x1 * tmp_arr0[0][0] + x2 * tmp_arr0[0][1];
+
+    std::cout << tmp_int << " " << floor(tmp_int) << std::endl;
+
+        
+        // ADDING THIS CODE 12:44PM 05/18/17
+        if (abs(tmp_int - ceil(tmp_int)) < 0.000001)
+        {
+            return ceil(tmp_int);
+        }
+
+        else if (abs(tmp_int - floor(tmp_int)) < 0.000001)
+        {
+            return floor(tmp_int);
+            
+        }
+        
+        
 
     return floor(tmp_int);
 }
@@ -64,25 +91,6 @@ void Tile::find_sublat()
 void Tile::laplacian()
 {
     l_lat = subLat;
-
-    for (int i = 0; i < l_lat.size(); i++)
-    {
-        for (int j = 0; j < l_lat[i].size(); j++)
-        {
-
-            l_lat[i][j] = 0;
-        }
-    }
-
-    for (int i = 0; i < l_lat.size(); i++)
-    {
-        for (int j = 0; j < l_lat[i].size(); j++)
-        {
-
-            std::cout << l_lat[i][j] << std::endl;
-        }
-    }
-
 
     for (int i = 1; i < l_lat.size() - 1; i++)
     {
@@ -237,3 +245,4 @@ void Tile::get_l_lat()
 
     std::cout << ")" << std::endl;
 }
+*/

@@ -3,7 +3,8 @@
 //#include "tile.cpp"
 
 
-void toppling(Tile a_tile)
+
+Tile toppling(Tile a_tile)
 {
     int i,j;
 
@@ -16,13 +17,25 @@ void toppling(Tile a_tile)
                 a_tile.topple();
                 a_tile.counter++;
 
-                //a_tile.get_l_lat();
+                std::cout << "Number of times toppled: " << a_tile.counter << std::endl;
+
+                if (a_tile.counter > 100)
+                {
+                    break;
+                }
 
                 i = 1;
                 j = 1;
             }
         }
+
+        if (a_tile.counter > 100)
+        {
+            break;
+        }
     }
+
+    return a_tile;
 }
 
 void find_pattern(Tile a_tile)
@@ -35,15 +48,18 @@ void find_pattern(Tile a_tile)
     a_tile.get_sublat();
 
     a_tile.laplacian();
-    std::cout << "lap" << std::endl;
+    std::cout << "Postlaplacian" << std::endl;
     a_tile.get_l_lat();
 
     int counter = 0;
 
-    toppling(a_tile);
+    Tile new_tile;
 
+    new_tile = toppling(a_tile);
 
-    a_tile.get_l_lat();
+    new_tile.get_l_lat();
+
+    
 }
     
 
@@ -56,7 +72,7 @@ int main()
 
     Tile new_tile(1.0/3.0, 1.0/3.0, 2.0/3.0, 3);
     
-    find_pattern(new_tile);
+    //find_pattern(new_tile);
 
     return 0;
 }

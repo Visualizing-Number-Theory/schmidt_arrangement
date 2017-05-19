@@ -62,6 +62,30 @@ void Tile::laplacian()
 {
     l_lat = subLat;
 
+    std::cout << "(" << std::endl;
+
+    for (int i=1; i < l_lat.size() - 1; i++)
+    {
+        std::cout << "(";
+
+        for (int j=1; j < l_lat[i].size() - 1; j++)
+        {
+            if (j+1 != l_lat[i].size() - 1)
+            {
+                std::cout << l_lat[i][j] << ",";
+            }
+            else
+            {
+                std::cout << l_lat[i][j];
+            }
+        }
+
+        std::cout << ")" << std::endl;
+    }
+
+    std::cout << ")" << std::endl;
+
+
     for (int i = 1; i < l_lat.size() - 1; i++)
     {
         for (int j = 1; j < l_lat[i].size() - 1; j++)
@@ -131,7 +155,7 @@ void Tile::topple()
     }
 }
 
-/*
+
 void Tile::draw_pattern()
 {
 
@@ -178,12 +202,12 @@ void Tile::draw_pattern()
 
     al_flip_display();
 
-    al_rest(10);
+    al_rest(20);
 
     al_destroy_display(display);
 
 }
-*/
+
 
 //getters
 void Tile::get_Ac()

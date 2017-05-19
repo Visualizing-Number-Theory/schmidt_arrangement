@@ -45,7 +45,7 @@ class Tile
         void get_Ac();
         void get_sublat();
         void get_l_lat();
-        //void draw_pattern();
+        void draw_pattern();
 
         ~Tile();
  
