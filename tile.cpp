@@ -231,13 +231,13 @@ void *Tile::draw_pattern()
     for(int i = 0; i < dim; i++){
         for(int j = 0; j < dim; j++){
             if(l_lat[i+1][j+1] == -2){
-                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(229, 240, 255));
+                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(0, 0, 255));
             }else if(l_lat[i+1][j+1] == -1){
-                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(170, 207, 255));
+                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(99, 247, 249));
             }else if(l_lat[i+1][j+1] == 0){
-                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(102, 168, 255));
+                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(247, 249, 99));
             }else if(l_lat[i+1][j+1] == 1){
-                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(40, 133, 255));
+                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(255, 0, 0));
             }
         }
     }
