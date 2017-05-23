@@ -1,6 +1,6 @@
 #include <iostream>
 #include "tile.hpp"
- 
+
 using namespace boost;
 
 // Constructor with parameters
@@ -233,9 +233,9 @@ void *Tile::draw_pattern()
             if(l_lat[i+1][j+1] == -2){
                 al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(0, 0, 255));
             }else if(l_lat[i+1][j+1] == -1){
-                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(99, 247, 249));
+                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(0, 255, 255));
             }else if(l_lat[i+1][j+1] == 0){
-                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(247, 249, 99));
+                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(255, 255, 0));
             }else if(l_lat[i+1][j+1] == 1){
                 al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(255, 0, 0));
             }
@@ -277,7 +277,7 @@ void Tile::get_Ac()
                 std::cout << Ac[i][j];
             }
         }
-        
+
         if (i+1 != 2)
         {
             std::cout << ")" << std::endl;
@@ -293,7 +293,7 @@ void Tile::get_Ac()
 
 void Tile::get_sublat()
 {
-    
+
     std::cout << "(" << std::endl;
 
     for (int i=0; i < subLat.size(); i++)
