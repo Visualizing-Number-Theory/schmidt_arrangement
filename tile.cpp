@@ -177,29 +177,6 @@ void *Tile::draw_pattern()
 		pthread_exit(NULL);
 	}
 
-    std::cout << "(" << std::endl;
-
-    for (int i=1; i < l_lat.size() - 1; i++)
-    {
-        std::cout << "(";
-
-        for (int j=1; j < l_lat[i].size() - 1; j++)
-        {
-            if (j+1 != l_lat[i].size() - 1)
-            {
-                std::cout << l_lat[i][j] << ",";
-            }
-            else
-            {
-                std::cout << l_lat[i][j];
-            }
-        }
-
-        std::cout << ")" << std::endl;
-    }
-
-    std::cout << ")" << std::endl;
-
     std::cout<<"Entered draw_pattern"<<std::endl;
     int dim = l_lat.size() - 2;
     int tile_size = 20;
