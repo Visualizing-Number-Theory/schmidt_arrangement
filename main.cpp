@@ -18,7 +18,7 @@ Tile* toppling(Tile* a_tile)
                 a_tile->topple();
                 a_tile->counter++;
 
-                   
+
                 std::cout << "Number of times toppled: " << a_tile->counter << std::endl;
 
 
@@ -28,7 +28,7 @@ Tile* toppling(Tile* a_tile)
                 {
                     break;
                 }
-                
+
                 i = 1;
                 j = 1;
             }
@@ -88,7 +88,7 @@ void find_pattern(sa_algo a_circle)
         std::cout << "Does not stabilize." << std::endl;
     }
 
-    
+
     //new_tile.draw_pattern();
 }
 

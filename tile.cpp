@@ -16,7 +16,7 @@ Tile::Tile(int nr, int dr, int nc1, int dc1, int nc2, int dc2, int newcurv)
     num_c2 = nc2;
     den_c2 = dc2;
 
-    curv = 4 * newcurv;
+    curv = 8 * newcurv;     //CHANGED SCALAR
 
     std::vector <std::vector <int> > vec(curv+2, std::vector<int>(curv+2));
 
@@ -30,7 +30,7 @@ Tile::~Tile() {}
 //setters
 void Tile::find_Ac()
 {
-    rational<int> r(num_r, den_r);
+    rational<int> r(num_r, den_r);      // Syntax note (declaring rational data type): "rational<int> variable_name(numerator, denominator)"
     rational<int> c1(num_c1, den_c2);
     rational<int> c2(num_c2, den_c2);
     rational<int> one_half(1, 2);
@@ -101,7 +101,7 @@ void Tile::laplacian()
         for (int j = 1; j < l_lat[i].size() - 1; j++)
         {
 
-            l_lat[i][j] = (subLat[i][j-1] - subLat[i][j]) + (subLat[i-1][j] - subLat[i][j])
+            l_lat[i][j] = (subLat[i][j-1] - subLat[i][j]) + (subLat[i-1][j] - subLat[i][j])     // CHANGED 7:48PM 05/25/17 -- x-y instead of y-x
             + (subLat[i][j+1] - subLat[i][j]) + (subLat[i+1][j] - subLat[i][j]);
 
             ct[i][j] = 0;
@@ -111,7 +111,7 @@ void Tile::laplacian()
 }
 
 // Topple places where chip value > 1
-void Tile::topple()
+void Tile::topple()         // CHANGED 4:25AM 05/26/17 -- Border toppling to correct places in lattice; checked periodicity by hand for (3,1,2) circle
 {
     for (int i = 1; i < l_lat.size() - 1; i++)
     {
@@ -119,15 +119,15 @@ void Tile::topple()
         {
             if (l_lat[i][j] > 1)
             {
-                // Change value to 1 --> toppled at that point
+                // Change value to 1 --> toppled at that point (for catching infinite loops)
                 ct[i][j] = 1;
 
-                // Decrease chip value at x by 1
+                // Decrease chip value at x by 4
                 l_lat[i][j] = l_lat[i][j] - 4;
 
                 // Increase chip value at adjacent positions by 1
                 // Right boundary
-                if (j + 1 == l_lat.size())
+                if (j + 1 == l_lat.size()-1)
                 {
                     l_lat[i][1]++;
                 }
@@ -139,7 +139,7 @@ void Tile::topple()
                 // Left boundary
                 if (j - 1 == 0)
                 {
-                    l_lat[i][l_lat.size()-1]++;
+                    l_lat[i][l_lat.size()-2]++;
                 }
                 else
                 {
@@ -147,7 +147,7 @@ void Tile::topple()
                 }
 
                 // Top boundary
-                if (i + 1 == l_lat.size())
+                if (i + 1 == l_lat.size()-1)
                 {
                     l_lat[1][j]++;
                 }
@@ -159,7 +159,7 @@ void Tile::topple()
                 // Bottom boundary
                 if (i - 1 == 0)
                 {
-                    l_lat[l_lat.size() - 1][j]++;
+                    l_lat[l_lat.size()-2][j]++;
                 }
                 else
                 {
@@ -193,13 +193,13 @@ void *Tile::draw_pattern()
 
     ALLEGRO_DISPLAY *display = NULL;
 	if(!al_init()){
-        std::cout << "Allegro didn't initialize!" << std::endl;
+        std::cout << "Allegro didn't initialize" << std::endl;
 		pthread_exit(NULL);
 	}
 
 	display = al_create_display(window_size, window_size);
     if(!display){
-        std::cout << "Allegro couldn't create display!" << std::endl;
+        std::cout << "Allegro couldn't create display" << std::endl;
 		pthread_exit(NULL);
 	}
 
