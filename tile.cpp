@@ -16,7 +16,7 @@ Tile::Tile(int nr, int dr, int nc1, int dc1, int nc2, int dc2, int newcurv)
     num_c2 = nc2;
     den_c2 = dc2;
 
-    curv = 8 * newcurv;     //CHANGED SCALAR
+    curv = 2 * newcurv;     //CHANGED SCALAR - Kate did again - this is width of box
 
     std::vector <std::vector <int> > vec(curv+2, std::vector<int>(curv+2));
 
@@ -178,7 +178,7 @@ void *Tile::draw_pattern()
 	}
 
     std::cout<<"Entered draw_pattern"<<std::endl;
-    int dim = l_lat.size() - 2;
+    int dim = l_lat.size(); // Kate changed this (it used to say -2)
     int tile_size = 20;
     if(dim > 250){
         std::cout << "Not showing whole matrix" << std::endl;
@@ -205,16 +205,16 @@ void *Tile::draw_pattern()
 
     al_init_primitives_addon();
 
-    for(int i = 1; i < dim-1; i++){
-        for(int j = 1; j < dim-1; j++){
+    for(int i = 0; i < dim-2; i++){ // Kate changed limits
+        for(int j = 0; j < dim-2; j++){
             if(l_lat[i+1][j+1] == -2){
-                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(0, 0, 255));
+                al_draw_filled_rectangle(10+tile_size*(i+1), 10+tile_size*(j+1), 10+tile_size*(i+2), 10+tile_size*(j+2), al_map_rgb(0, 0, 255));
             }else if(l_lat[i+1][j+1] == -1){
-                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(0, 255, 255));
+                al_draw_filled_rectangle(10+tile_size*(i+1), 10+tile_size*(j+1), 10+tile_size*(i+2), 10+tile_size*(j+2), al_map_rgb(0, 255, 255));
             }else if(l_lat[i+1][j+1] == 0){
-                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(255, 255, 0));
+                al_draw_filled_rectangle(10+tile_size*(i+1), 10+tile_size*(j+1), 10+tile_size*(i+2), 10+tile_size*(j+2), al_map_rgb(255, 255, 0));
             }else if(l_lat[i+1][j+1] == 1){
-                al_draw_filled_rectangle(10+tile_size*i, 10+tile_size*j, 10+tile_size*(i+1), 10+tile_size*(j+1), al_map_rgb(255, 0, 0));
+                al_draw_filled_rectangle(10+tile_size*(i+1), 10+tile_size*(j+1), 10+tile_size*(i+2), 10+tile_size*(j+2), al_map_rgb(255, 0, 0));
             }
         }
     }
