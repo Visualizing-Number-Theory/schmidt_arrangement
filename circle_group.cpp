@@ -20,7 +20,7 @@ CircleGroup::CircleGroup() {
                     float ycoor = 700*(2*t-1)/(2*r);
                     float radi = 700*1/(2*r);
                     
-                    circles.push_back(sa_algo(radi, xcoor, ycoor, r, t, s));
+                    circles.push_back(sa_algo(radi, xcoor, ycoor, r, 2*s, -2*t+2*r+1)); // Kate changed this.
                 }
             }
         }

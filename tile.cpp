@@ -35,10 +35,10 @@ void Tile::find_Ac()
     rational<int> c2(num_c2, den_c2);
     rational<int> one_half(1, 2);
 
-    Ac[0][0] = one_half * (r + c1);
-    Ac[1][0] = one_half * c2;
-    Ac[0][1] = one_half * c2;
-    Ac[1][1] = one_half * (r - c1);
+    Ac[0][0] = one_half * (r + c2); // Kate switched c1 and c2
+    Ac[1][0] = one_half * c1;
+    Ac[0][1] = one_half * c1;
+    Ac[1][1] = one_half * (r - c2);
 }
 
 
