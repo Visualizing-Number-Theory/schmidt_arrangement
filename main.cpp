@@ -87,9 +87,40 @@ void find_pattern(sa_algo a_circle)
     {
         std::cout << "Does not stabilize." << std::endl;
     }
+}
 
+void find_matrix(sa_algo a_circle)
+{
+    if (a_circle.check_conditions() == 1)
+    {
+        //print our variables
+        a_circle.get_initial_variables();
 
-    //new_tile.draw_pattern();
+        a_circle.find_ed();
+        //a_circl.get_ed();
+    
+        a_circle.find_ebp_edp();
+        //a_circle.get_ebp_edp();
+
+        a_circle.find_dp();
+        //a_circle.get_dp();
+
+        a_circle.find_d();
+        //a_circle.get_d();
+
+        a_circle.find_bp();
+        //a_circle.get_bp();
+
+        a_circle.find_points();
+        //a_circle.get_points();
+
+        a_circle.find_circle_matrix();
+        a_circle.get_circle_matrix();
+    }
+    else
+    {
+        std::cout << "First condition (1) does not hold" << std::endl;
+    }
 }
 
 int main(int argc, char **argv)
@@ -174,7 +205,7 @@ int main(int argc, char **argv)
                         std::cout << a_circle.get_cr() << " " << a_circle.get_cx() << " " << a_circle.get_cy() << " " << a_circle.get_prime() << std::endl;
                         //std::cout << a_circle.get_radius() / 700.0  << " " << a_circle.get_x() / 700.0 << " " << a_circle.get_y() / 700.0 << std::endl;
                         find_pattern(a_circle);
-                        //find_matrix(a_circle);
+                        find_matrix(a_circle);
                         change = true;
                     }
                     else
