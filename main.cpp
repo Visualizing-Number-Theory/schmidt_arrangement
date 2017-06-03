@@ -62,15 +62,16 @@ void find_pattern(sa_algo a_circle)
 
 
     a_tile->find_Ac();
+    std::cout << "A_C matrix:" << std::endl;
     a_tile->get_Ac();
 
     a_tile->find_sublat();
-    std::cout << "PreLaplacian" << std::endl;
-    a_tile->get_sublat();
+    //std::cout << "PreLaplacian" << std::endl;
+    //a_tile->get_sublat(); // Kate commented this out to more easily see other data.
 
     a_tile->laplacian();
-    std::cout << "PostLaplacian (not fully toppled)" << std::endl;
-    a_tile->get_l_lat();
+    //std::cout << "PostLaplacian (not fully toppled)" << std::endl;
+    //a_tile->get_l_lat();
 
     Tile* new_tile;
 
@@ -78,7 +79,7 @@ void find_pattern(sa_algo a_circle)
 
     if (new_tile->class_check == true)
     {
-        new_tile->get_l_lat();
+        //new_tile->get_l_lat();
 
         pthread_t *thread = new pthread_t;
         pthread_create(thread, NULL, PatternDraw, (void*)a_tile);
@@ -202,6 +203,8 @@ int main(int argc, char **argv)
                     sa_algo a_circle = Apollo.click(initpos_x, initpos_y);
                     if (a_circle.get_cr() != 0 || a_circle.get_cx() != 0 || a_circle.get_cy() != 0)
                     {
+			std::cout << "Curvature, x*curv, y*curv, a prime divisor to use:" << std::endl; // Kate added an exlanation
+
                         std::cout << a_circle.get_cr() << " " << a_circle.get_cx() << " " << a_circle.get_cy() << " " << a_circle.get_prime() << std::endl;
                         //std::cout << a_circle.get_radius() / 700.0  << " " << a_circle.get_x() / 700.0 << " " << a_circle.get_y() / 700.0 << std::endl;
                         find_pattern(a_circle);
