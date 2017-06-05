@@ -29,13 +29,8 @@ class sa_algo
 {
 private:
     //initial variables
-    int found_d = 1;
-    int found_bp = 1;
     float radius, x_coor, y_coor;
     int cr, cx, cy, prime, delta;
-
-    //e_d, e_bp, e_dp
-    int e_d, e_bp, e_dp;
 
     //d_p
     int d_p;
@@ -56,45 +51,31 @@ public:
     
     //check conditions
     int check_conditions();
-    int check_d_bp();
-    int check_dp();
     int check_circle_equivalence();
     
     //setter methods
-    void find_ed();
-    void find_ebp_edp();
-    void find_dp();
     void find_d();
-    void find_bp();
-    void find_points();
-    void find_circle_matrix();
+    void find_gaussian_matrix();
     
     //getter methods
     void get_initial_variables();
-    void get_ed();
-    void get_ebp_edp();
+    void get_bp();
     void get_dp();
     void get_d();
-    void get_bp();
-    void get_points();
-    void get_circle_matrix();
-    
-    int get_prime();
-    int get_radius();
-    int get_x();
-    int get_y();
 
+    void get_points();
+    void get_gaussian_matrix();
+
+    int get_prime();
     int get_cr();
     int get_cx();
     int get_cy();
-
-    int get_found_d();
-    int get_found_bp();
-
-    
+    int get_radius();
+    int get_x();
+    int get_y();
+        
     //destructor
     ~sa_algo();
-    
 };
 
 

@@ -92,35 +92,21 @@ void find_pattern(sa_algo a_circle)
 
 void find_matrix(sa_algo a_circle)
 {
+    //check if the first condition r | x^2 + y + y^2 holds
     if (a_circle.check_conditions() == 1)
     {
-        //print our variables
-        a_circle.get_initial_variables();
+        a_circle.find_gaussian_matrix();
+        a_circle.get_gaussian_matrix();
 
-        a_circle.find_ed();
-        //a_circl.get_ed();
-    
-        a_circle.find_ebp_edp();
-        //a_circle.get_ebp_edp();
-
-        a_circle.find_dp();
-        //a_circle.get_dp();
-
-        a_circle.find_d();
-        //a_circle.get_d();
-
-        a_circle.find_bp();
-        //a_circle.get_bp();
-
-        a_circle.find_points();
-        //a_circle.get_points();
-
-        a_circle.find_circle_matrix();
-        a_circle.get_circle_matrix();
+        //check if matrix is correct
+        if (a_circle.check_circle_equivalence() == 0)
+        {
+            std::cout << "Matrix is incorrect." << std::endl;
+        }
     }
     else
     {
-        std::cout << "First condition (1) does not hold" << std::endl;
+        std::cout << "Condition (1) does not hold: r | x^2 + y + y^2" << std::endl;
     }
 }
 
