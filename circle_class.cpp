@@ -166,6 +166,8 @@ void sa_algo::print_d()
 void sa_algo::get_points()
 {
     std::cout << "\n" << std::endl;
+    std::cout << "b_p: " << b_p << std::endl;
+    std::cout << "d_p: " << d_p << std::endl;
     std::cout << "b: " << b << std::endl;
     std::cout << "a: " << a << std::endl;
     std::cout << "a_p: " << a_p << std::endl;
