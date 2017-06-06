@@ -113,6 +113,8 @@ void find_matrix(sa_algo a_circle)
     }
     else
     {
+        a_circle.find_gaussian_matrix();
+        a_circle.get_gaussian_matrix();
         std::cout << "Condition passed: r | x^2 + y + y^2" << std::endl;
     }
 }
