@@ -44,7 +44,7 @@ sa_algo::sa_algo(float r, float x, float y, int c_r, int s, int t)
 
     cr = c_r;
     cx = s;
-    cy = t;
+    cy = -t;
     prime = isPrime(cr);
 
 
@@ -118,7 +118,7 @@ void sa_algo::find_gaussian_matrix()
     }
     else
     {
-        b_p = find_gcd_3(cr, cx, cy);
+        b_p = find_gcd_3(std::abs(cr), std::abs(cx), std::abs(cy));
         d_p = b_p;
         find_d();
         b = (cr + b_p * d) / d_p;
@@ -148,17 +148,17 @@ void sa_algo::get_initial_variables()
     std::cout << "prime: " << prime << std::endl;
 }
 
-void sa_algo::get_bp()
+void sa_algo::print_bp()
 {
     std::cout << "b_p: " << b_p << std::endl;
 }
 
-void sa_algo::get_dp()
+void sa_algo::print_dp()
 {
     std::cout << "d_p: " << d_p << std::endl;
 }
 
-void sa_algo::get_d()
+void sa_algo::print_d()
 {
     std::cout << "d: " << d << std::endl;
 }
@@ -209,10 +209,17 @@ int sa_algo::get_x()
 {
     return x_coor;
 }
+
 int sa_algo::get_y()
 {
     return y_coor;
 }
+
+int sa_algo::get_dp()
+{
+    return d_p;
+}
+
 
 //deconstructor
 sa_algo::~sa_algo() {}

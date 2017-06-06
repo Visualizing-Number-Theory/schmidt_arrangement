@@ -93,20 +93,34 @@ void find_pattern(sa_algo a_circle)
 void find_matrix(sa_algo a_circle)
 {
     //check if the first condition r | x^2 + y + y^2 holds
-    if (a_circle.check_conditions() == 1)
-    {
-        a_circle.find_gaussian_matrix();
-        a_circle.get_gaussian_matrix();
+    //
+    std::cout << "\n" << std::endl;
+    a_circle.get_initial_variables();
+    std::cout << "\n" << std::endl;
 
-        //check if matrix is correct
-        if (a_circle.check_circle_equivalence() == 0)
+    if (a_circle.check_conditions() == 0)
+    {
+        std::cout << "Conditon failed: r | x^2 + y + y^2 --- continuing ---" << std::endl;
+        a_circle.find_gaussian_matrix();
+        if (a_circle.get_dp() == 0)
         {
-            std::cout << "Matrix is incorrect." << std::endl;
+            std::cout << "d_p is 0. Stopping." << std::endl;
+        }
+        else
+        {
+            a_circle.get_gaussian_matrix();
+
+            //check if matrix is correct
+            if (a_circle.check_circle_equivalence() == 0)
+            {
+                a_circle.get_points();
+                std::cout << "Matrix is incorrect." << std::endl;
+            }
         }
     }
     else
     {
-        std::cout << "Condition (1) does not hold: r | x^2 + y + y^2" << std::endl;
+        std::cout << "Condition passed: r | x^2 + y + y^2" << std::endl;
     }
 }
 

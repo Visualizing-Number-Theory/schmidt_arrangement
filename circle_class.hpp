@@ -59,9 +59,9 @@ public:
     
     //getter methods
     void get_initial_variables();
-    void get_bp();
-    void get_dp();
-    void get_d();
+    void print_bp();
+    void print_dp();
+    void print_d();
 
     void get_points();
     void get_gaussian_matrix();
@@ -73,6 +73,7 @@ public:
     int get_radius();
     int get_x();
     int get_y();
+    int get_dp();
         
     //destructor
     ~sa_algo();
