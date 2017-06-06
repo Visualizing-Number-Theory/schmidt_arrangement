@@ -145,7 +145,7 @@ void sa_algo::get_initial_variables()
     std::cout << "curve r: " << cr << std::endl;
     std::cout << "curve x: " << cx << std::endl;
     std::cout << "curve y: " << cy << std::endl;
-    std::cout << "prime: " << prime << std::endl;
+    //std::cout << "prime: " << prime << std::endl;
 }
 
 void sa_algo::print_bp()
