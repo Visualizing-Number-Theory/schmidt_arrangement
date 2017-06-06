@@ -31,8 +31,8 @@ Tile::~Tile() {}
 void Tile::find_Ac()
 {
     rational<int> r(num_r, den_r);      // Syntax note (declaring rational data type): "rational<int> variable_name(numerator, denominator)"
-    rational<int> c1(num_c1, den_c2);
-    rational<int> c2(num_c2, den_c2);
+    rational<int> c1(num_c1*2, den_c2);
+    rational<int> c2(num_c2*2+1, den_c2);
     rational<int> one_half(1, 2);
 
     Ac[0][0] = one_half * (r + c2); // Kate switched c1 and c2

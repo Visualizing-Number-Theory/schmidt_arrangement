@@ -43,8 +43,8 @@ sa_algo::sa_algo(float r, float x, float y, int c_r, int s, int t)
     y_coor = y;
 
     cr = c_r;
-    cx = s;
-    cy = -t;
+    cx = s/2; //s;
+    cy = (-t-1)/2; //-t;
     prime = isPrime(cr);
 
 
