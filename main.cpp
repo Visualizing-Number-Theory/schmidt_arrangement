@@ -102,20 +102,13 @@ void find_matrix(sa_algo a_circle)
     {
         std::cout << "Conditon failed: r | x^2 + y + y^2 --- continuing ---" << std::endl;
         a_circle.find_gaussian_matrix();
-        if (a_circle.get_dp() == 0)
-        {
-            std::cout << "d_p is 0. Stopping." << std::endl;
-        }
-        else
-        {
-            a_circle.get_gaussian_matrix();
+        a_circle.get_gaussian_matrix();
 
-            //check if matrix is correct
-            if (a_circle.check_circle_equivalence() == 0)
-            {
-                a_circle.get_points();
-                std::cout << "Matrix is incorrect." << std::endl;
-            }
+        //check if matrix is correct
+        if (a_circle.check_circle_equivalence() == 0)
+        {
+            a_circle.get_points();
+            std::cout << "Matrix is incorrect." << std::endl;
         }
     }
     else
