@@ -46,11 +46,6 @@ sa_algo::sa_algo(float r, float x, float y, int c_r, int s, int t)
     cx = s/2; //s;
     cy = (-t-1)/2; //-t;
     prime = isPrime(cr);
-
-
-    //std::cout << prime << std::endl;
-
-    delta = -1;
 }
 
 //setters
@@ -68,24 +63,20 @@ int sa_algo::check_conditions()
 
 int sa_algo::check_circle_equivalence()
 {
-    std::tuple<int, int, int> coordinates;
-    coordinates = std::make_tuple(cr, cx, cy);
-    if (delta == -1)
+    //check that (r,x,y) = (bd' - b'd, bc' - a'd, a'd' - b'c')
+    if (cr == b * d_p - b_p * d && b * c_p - a_p * d && a_p * d_p - b_p * c_p)
     {
-        std::tuple<int, int, int> check;
-        check = std::make_tuple(b_p * d - b * d_p, a_p * d - b * c_p, b * c - a * d);
-        if (check != coordinates)
-        {
-            return 0;
-        }
+        std::cout << "Equivalence conditions passed: (r,x,y) = (bd' - b'd, bc' - a'd, a'd' - b'c')" << std::endl;
+        std::cout << "(bd' - b'd, bc' - a'd, a'd' - b'c') = (" << b * d_p - b_p * d << ", " << b * c_p - a_p * d << ", " << a_p * d_p - b_p * c_p << ")" << std::endl;
+        return 1;
     }
-    else if (delta != -1)
+    else
     {
-        //pass for now
+        std::cout << "Equivalence condition did not pass: (r,x,y) != (bd' - b'd, bc' - a'd, a'd' - b'c')" << std::endl;
+        std::cout << "(bd' - b'd, bc' - a'd, a'd' - b'c') = (" << b * d_p - b_p * d << ", " << b * c_p - a_p * d << ", " << a_p * d_p - b_p * c_p << ")" << std::endl;
+        return 0;
     }
-    return 1;
 }
-
 
 void sa_algo::find_d()
 {
