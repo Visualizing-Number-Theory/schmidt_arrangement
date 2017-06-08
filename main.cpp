@@ -58,7 +58,7 @@ void* PatternDraw(void* new_tile){
 
 void find_pattern(sa_algo a_circle)
 {
-    Tile* a_tile = new Tile(1, a_circle.get_cr(), a_circle.get_cx(), a_circle.get_cr(), a_circle.get_cy(), a_circle.get_cr(), a_circle.get_cr());
+    Tile* a_tile = new Tile(1, a_circle.get_cr(), a_circle.get_tile_x(), a_circle.get_cr(), a_circle.get_tile_y(), a_circle.get_cr(), a_circle.get_cr());
 
 
     a_tile->find_Ac();
@@ -197,11 +197,11 @@ int main(int argc, char **argv)
                 if(al_get_timer_count(timer) <= 2.5){
                     //CLICK => circle selection
                     sa_algo a_circle = Apollo.click(initpos_x, initpos_y);
-                    if (a_circle.get_cr() != 0 || a_circle.get_cx() != 0 || a_circle.get_cy() != 0)
+                    if (a_circle.get_cr() != 0 || a_circle.get_tile_x() != 0 || a_circle.get_tile_y() != 0)
                     {
 			std::cout << "Curvature, x*curv, y*curv, a prime divisor to use:" << std::endl; // Kate added an exlanation
 
-                        std::cout << a_circle.get_cr() << " " << a_circle.get_cx() << " " << a_circle.get_cy() << " " << a_circle.get_prime() << std::endl;
+                        std::cout << a_circle.get_cr() << " " << a_circle.get_tile_x() << " " << a_circle.get_tile_y() << " " << a_circle.get_prime() << std::endl;
                         //std::cout << a_circle.get_radius() / 700.0  << " " << a_circle.get_x() / 700.0 << " " << a_circle.get_y() / 700.0 << std::endl;
                         find_pattern(a_circle);
                         find_matrix(a_circle);
