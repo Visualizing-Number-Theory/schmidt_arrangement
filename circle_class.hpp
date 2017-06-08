@@ -47,7 +47,7 @@ private:
 
 public:
     //constructor
-    sa_algo(float r, float x, float y, int c_r, int s, int t);
+    sa_algo(float r, float x, float y, int c_r, int s, int t, int ms, int mt);
     
     //check conditions
     int check_conditions();
