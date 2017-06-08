@@ -30,7 +30,7 @@ class sa_algo
 private:
     //initial variables
     float radius, x_coor, y_coor;
-    int cr, cx, cy, prime, delta;
+    int cr, tile_x, tile_y, prime, matrix_x, matrix_y;
 
     //d_p
     int d_p;
@@ -68,12 +68,14 @@ public:
 
     int get_prime();
     int get_cr();
-    int get_cx();
-    int get_cy();
+    int get_tile_x();
+    int get_tile_y();
     int get_radius();
     int get_x();
     int get_y();
     int get_dp();
+    int get_matrix_x();
+    int get_matrix_y();
         
     //destructor
     ~sa_algo();
