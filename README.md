@@ -8,9 +8,10 @@ Command line:
 then run:
 > `./topple`
 
-**Examples:**
+**Examples:** 
+
 **1.** 
-![alt text](https://github.com/Visualizing-Number-Theory/schmidt_arrangement/blob/master/examples/example1.pdf)
+![Screenshot](example1.pdf)
 
 **2.** 
-![alt text](https://github.com/Visualizing-Number-Theory/schmidt_arrangement/blob/master/examples/example2.pdf)
+![Screenshot](example2.pdf)
