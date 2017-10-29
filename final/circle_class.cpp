@@ -36,7 +36,7 @@ int find_gcd_3(int a, int b, int c)
 
 
 //constructor
-sa_algo::sa_algo(float r, float x, float y, int c_r, int s, int t, int ms, int mt)
+sa_algo::sa_algo(float r, float x, float y, int c_r, int s, int t)
 {
     radius = r;
     x_coor = x;
@@ -50,8 +50,8 @@ sa_algo::sa_algo(float r, float x, float y, int c_r, int s, int t, int ms, int m
     tile_y = t; 
 
     //For matrix
-    matrix_x = ms/2; //s
-    matrix_y = (-mt - 1)/2; //-t
+    matrix_x = s/2; //s
+    matrix_y = (-t - 1)/2; //-t
 
     prime = isPrime(cr);
 }

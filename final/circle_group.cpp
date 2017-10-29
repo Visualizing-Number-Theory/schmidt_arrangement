@@ -20,7 +20,7 @@ CircleGroup::CircleGroup() {
                     float ycoor = 700*(2*t-1)/(2*r);
                     float radi = 700*1/(2*r);
                     
-                    circles.push_back(sa_algo(radi, xcoor, ycoor, r, s, t, 2*s, -2*t+2*r+1)); // Kate changed this.
+                    circles.push_back(sa_algo(radi, xcoor, ycoor, r, 2*s, -2*t+2*r+1)); // Kate changed this.
                 }
             }
         }
@@ -99,7 +99,7 @@ void CircleGroup::zoom(float x1, float x2, float y1, float y2){
                     float radi = (700/dist)*1/(2*r);
                     if(xcoor + radi > x or xcoor - radi < x + dist or ycoor + radi > y or ycoor - radi < y + dist){
 
-                        circles.push_back(sa_algo(radi, xcoor, ycoor, r, s, t, 2*s, -2*t+2*r+1));
+                        circles.push_back(sa_algo(radi, xcoor, ycoor, r, 2*s, -2*t+2*r+1));
                     }
                 }
             }
@@ -133,7 +133,7 @@ sa_algo CircleGroup::click(float posx, float posy)
         }
     }
     //need return an error (or identifier for an error)
-    return sa_algo(0,0,0,0,0,0,0,0);
+    return sa_algo(0,0,0,0,0,0);
 
 }
 
